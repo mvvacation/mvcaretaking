@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { MOCK_CARETAKERS, MARKET_STATS } from "@/lib/data";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
@@ -101,14 +102,13 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center">
         {/* Background */}
         <div className="absolute inset-0 bg-navy-950">
-          <div
-            className="absolute inset-0 opacity-25"
-            style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
+          <Image
+            src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80"
+            alt=""
+            fill
+            priority
+            className="object-cover opacity-25"
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy-950/60 via-navy-950/80 to-navy-950" />
           {/* Subtle gradient orb */}

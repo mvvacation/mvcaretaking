@@ -101,8 +101,7 @@ export async function POST(req: NextRequest) {
       { success: true, message: "Lead submitted successfully." },
       { status: 201 }
     );
-  } catch (err) {
-    console.error("[API /api/leads] Error:", err);
+  } catch {
     return NextResponse.json(
       { error: "Invalid request. Please try again." },
       { status: 400 }

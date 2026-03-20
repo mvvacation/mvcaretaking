@@ -55,12 +55,21 @@ export const metadata: Metadata = {
     title: "MVCaretaking — Martha's Vineyard Caretaker Directory & Home Watch",
     description:
       "Connect with trusted, vetted caretakers who protect your Martha's Vineyard home year-round.",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "MVCaretaking — Martha's Vineyard Caretaker Directory & Home Watch",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "MVCaretaking — Martha's Vineyard Caretaker Directory",
     description:
       "Connect with trusted, vetted caretakers who protect your Martha's Vineyard home year-round.",
+    images: ["/opengraph-image"],
   },
   icons: {
     icon: [
