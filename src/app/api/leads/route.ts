@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { getDb } from "@/lib/db";
 import { leads } from "@/lib/db/schema";
 
 // Simple in-memory rate limiting
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Save to database
-    await db.insert(leads).values({
+    await getDb().insert(leads).values({
       firstName,
       lastName,
       email,
