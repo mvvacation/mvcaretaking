@@ -8,13 +8,18 @@ export default function BackToTop() {
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 600);
+    let timeout: ReturnType<typeof setTimeout>;
+    const onScroll = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setVisible(window.scrollY > 600), 100);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReducedMotion(mq.matches);
     const onMotionChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", onMotionChange);
     return () => {
+      clearTimeout(timeout);
       window.removeEventListener("scroll", onScroll);
       mq.removeEventListener("change", onMotionChange);
     };
@@ -32,7 +37,7 @@ export default function BackToTop() {
           : "opacity-0 translate-y-4 pointer-events-none"
       }`}
     >
-      <ArrowUp className="w-5 h-5" />
+      <ArrowUp className="w-5 h-5" aria-hidden="true" />
     </button>
   );
 }

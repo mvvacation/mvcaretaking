@@ -92,6 +92,12 @@ const jsonLd = {
   description:
     "Free matching service connecting Martha's Vineyard homeowners with trusted, vetted caretaking professionals. Property inspections, storm response, seasonal management across all 6 MV towns.",
   url: "https://mvcaretaking.com",
+  image: {
+    "@type": "ImageObject",
+    url: "https://mvcaretaking.com/opengraph-image",
+    width: 1200,
+    height: 630,
+  },
   areaServed: [
     { "@type": "City", name: "Edgartown, MA" },
     { "@type": "City", name: "Oak Bluffs, MA" },
@@ -108,6 +114,11 @@ const jsonLd = {
   },
   priceRange: "Free matching service",
   serviceType: "Property Caretaker Matching Service",
+  sameAs: [
+    "https://mvvacation.com",
+    "https://mvrestaurants.com",
+    "https://mvboats.com",
+  ],
 };
 
 export default function RootLayout({

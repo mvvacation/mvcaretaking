@@ -784,6 +784,16 @@ export default function BlogPostPage({ params }: Props) {
     },
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://mvcaretaking.com" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://mvcaretaking.com/blog" },
+      { "@type": "ListItem", position: 3, name: post.title, item: `https://mvcaretaking.com/blog/${params.slug}` },
+    ],
+  };
+
   // Simple markdown-like rendering
   const renderContent = (text: string) => {
     return text
@@ -831,6 +841,29 @@ export default function BlogPostPage({ params }: Props) {
             </ul>
           );
         }
+        if (/^\d+\.\s/.test(trimmed)) {
+          const items = trimmed.split("\n").map((line) => line.replace(/^\d+\.\s+/, "").trim());
+          return (
+            <ol key={i} className="space-y-1.5 my-3 list-decimal list-inside">
+              {items.map((item, j) => {
+                const parts = item.split(/(\*\*[^*]+\*\*)/g);
+                return (
+                  <li key={j} className="text-navy-700 leading-relaxed">
+                    {parts.map((part, k) =>
+                      part.startsWith("**") && part.endsWith("**") ? (
+                        <strong key={k} className="font-semibold text-navy-900">
+                          {part.slice(2, -2)}
+                        </strong>
+                      ) : (
+                        part
+                      )
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          );
+        }
         // Bold text processing
         const parts = trimmed.split(/(\*\*[^*]+\*\*)/g);
         return (
@@ -854,6 +887,10 @@ export default function BlogPostPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* Header */}
       <section className="bg-navy-950 text-white section-padding pb-12 relative overflow-hidden">

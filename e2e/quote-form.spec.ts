@@ -49,7 +49,8 @@ test.describe("Get a Quote form", () => {
 
   test("honeypot field is hidden", async ({ page }) => {
     const honeypot = page.locator('input[name="website_url"]');
-    await expect(honeypot).toBeHidden();
+    await expect(honeypot).toHaveAttribute("aria-hidden", "true");
+    await expect(honeypot).toHaveAttribute("tabindex", "-1");
   });
 
   test("page has correct title", async ({ page }) => {

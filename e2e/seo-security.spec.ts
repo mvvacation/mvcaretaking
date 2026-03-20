@@ -32,36 +32,64 @@ test.describe("SEO & Meta", () => {
     expect(parsed.name).toBe("MVCaretaking");
   });
 
-  test("blog post has JSON-LD structured data", async ({ page }) => {
+  test("blog post has Article JSON-LD", async ({ page }) => {
     await page.goto("/blog/do-i-need-a-caretaker-marthas-vineyard");
     const jsonLd = page.locator('script[type="application/ld+json"]');
     const count = await jsonLd.count();
-    expect(count).toBeGreaterThanOrEqual(1);
-    const content = await jsonLd.first().textContent();
-    const parsed = JSON.parse(content!);
-    expect(parsed["@type"]).toBe("LocalBusiness");
-    expect(parsed.name).toBe("MVCaretaking");
+    expect(count).toBeGreaterThanOrEqual(2);
+    const schemas: Record<string, unknown>[] = [];
+    for (let i = 0; i < count; i++) {
+      schemas.push(JSON.parse((await jsonLd.nth(i).textContent())!));
+    }
+    const article = schemas.find((s) => s["@type"] === "Article");
+    expect(article).toBeTruthy();
+    expect((article as Record<string, unknown>).headline).toBeTruthy();
+    const breadcrumb = schemas.find((s) => s["@type"] === "BreadcrumbList");
+    expect(breadcrumb).toBeTruthy();
   });
 
-  test("FAQ page has JSON-LD structured data", async ({ page }) => {
+  test("FAQ page has FAQPage JSON-LD", async ({ page }) => {
     await page.goto("/faq");
     const jsonLd = page.locator('script[type="application/ld+json"]');
     const count = await jsonLd.count();
-    expect(count).toBeGreaterThanOrEqual(1);
-    const content = await jsonLd.first().textContent();
-    const parsed = JSON.parse(content!);
-    expect(parsed["@type"]).toBe("LocalBusiness");
+    expect(count).toBeGreaterThanOrEqual(2);
+    const schemas: Record<string, unknown>[] = [];
+    for (let i = 0; i < count; i++) {
+      schemas.push(JSON.parse((await jsonLd.nth(i).textContent())!));
+    }
+    const faqSchema = schemas.find((s) => s["@type"] === "FAQPage");
+    expect(faqSchema).toBeTruthy();
   });
 
-  test("town page has JSON-LD structured data", async ({ page }) => {
+  test("town page has Place JSON-LD", async ({ page }) => {
     await page.goto("/towns/edgartown");
     const jsonLd = page.locator('script[type="application/ld+json"]');
     const count = await jsonLd.count();
-    expect(count).toBeGreaterThanOrEqual(1);
-    const content = await jsonLd.first().textContent();
-    const parsed = JSON.parse(content!);
-    expect(parsed["@type"]).toBe("LocalBusiness");
-    expect(parsed.name).toBe("MVCaretaking");
+    expect(count).toBeGreaterThanOrEqual(2);
+    const schemas: Record<string, unknown>[] = [];
+    for (let i = 0; i < count; i++) {
+      schemas.push(JSON.parse((await jsonLd.nth(i).textContent())!));
+    }
+    const place = schemas.find((s) => s["@type"] === "Place");
+    expect(place).toBeTruthy();
+    expect((place as Record<string, string>).name).toContain("Edgartown");
+    const breadcrumb = schemas.find((s) => s["@type"] === "BreadcrumbList");
+    expect(breadcrumb).toBeTruthy();
+  });
+
+  test("services page has Service JSON-LD", async ({ page }) => {
+    await page.goto("/services");
+    const jsonLd = page.locator('script[type="application/ld+json"]');
+    const count = await jsonLd.count();
+    expect(count).toBeGreaterThanOrEqual(2);
+    const schemas: Record<string, unknown>[] = [];
+    for (let i = 0; i < count; i++) {
+      schemas.push(JSON.parse((await jsonLd.nth(i).textContent())!));
+    }
+    const service = schemas.find((s) => s["@type"] === "Service");
+    expect(service).toBeTruthy();
+    const breadcrumb = schemas.find((s) => s["@type"] === "BreadcrumbList");
+    expect(breadcrumb).toBeTruthy();
   });
 
   test("sitemap is accessible", async ({ page }) => {

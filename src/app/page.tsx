@@ -99,7 +99,7 @@ export default function HomePage() {
       {/* ============ HERO ============ */}
       <section className="relative min-h-screen flex items-center">
         {/* Background */}
-        <div className="absolute inset-0 bg-navy-950">
+        <div className="absolute inset-0 bg-navy-950 pointer-events-none">
           <Image
             src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80"
             alt="Luxury Martha's Vineyard home with manicured grounds"
@@ -180,7 +180,7 @@ export default function HomePage() {
               { icon: CloudLightning, label: "Storm Response" },
             ].map(({ icon: Icon, label }) => (
               <span key={label} className="flex items-center gap-2.5 text-sm text-navy-400">
-                <Icon className="w-4 h-4 text-gold-500" />
+                <Icon className="w-4 h-4 text-gold-500" aria-hidden="true" />
                 <span className="tracking-wide">{label}</span>
               </span>
             ))}
@@ -225,7 +225,7 @@ export default function HomePage() {
                 className="relative bg-navy-50/50 rounded-2xl p-8 border border-navy-100/50 hover:shadow-luxury transition-all duration-500"
               >
                 <div className="w-12 h-12 rounded-xl bg-navy-900 flex items-center justify-center mb-5">
-                  <point.icon className="w-5 h-5 text-gold-400" />
+                  <point.icon className="w-5 h-5 text-gold-400" aria-hidden="true" />
                 </div>
                 <h3 className="text-lg font-serif font-bold text-navy-900 mb-3">{point.title}</h3>
                 <p className="text-navy-600 leading-relaxed text-[15px]">
@@ -274,7 +274,7 @@ export default function HomePage() {
                 className="group relative bg-white/[0.03] backdrop-blur-sm rounded-2xl p-8 border border-white/[0.06] hover:border-gold-500/20 hover:bg-white/[0.06] transition-all duration-500"
               >
                 <div className="w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center mb-5 group-hover:bg-gold-500/20 transition-colors duration-300">
-                  <svc.icon className="w-5 h-5 text-gold-400" />
+                  <svc.icon className="w-5 h-5 text-gold-400" aria-hidden="true" />
                 </div>
                 <h3 className="text-lg font-serif font-semibold text-white mb-3 group-hover:text-gold-300 transition-colors duration-300">
                   {svc.title}
@@ -358,7 +358,7 @@ export default function HomePage() {
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="text-center">
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-navy-900 mb-5 shadow-luxury">
-                  <Icon className="w-6 h-6 text-gold-400" />
+                  <Icon className="w-6 h-6 text-gold-400" aria-hidden="true" />
                 </div>
                 <h3 className="font-serif font-bold text-navy-900">{title}</h3>
                 <p className="mt-2 text-sm text-navy-600 leading-relaxed">{desc}</p>
@@ -453,7 +453,7 @@ export default function HomePage() {
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-navy-900 mb-6 shadow-luxury">
-                  <Icon className="w-6 h-6 text-gold-400" />
+                  <Icon className="w-6 h-6 text-gold-400" aria-hidden="true" />
                 </div>
                 <h3 className="font-serif font-bold text-navy-900 text-lg">{title}</h3>
                 <p className="mt-3 text-sm text-navy-600 leading-relaxed">{desc}</p>
@@ -486,7 +486,7 @@ export default function HomePage() {
                 className="group bg-white rounded-2xl p-7 border border-navy-100/50 hover:shadow-luxury-lg hover:border-gold-200 transition-all duration-500"
               >
                 <div className="w-11 h-11 rounded-xl bg-navy-50 flex items-center justify-center mb-4 group-hover:bg-gold-50 transition-colors duration-300">
-                  <Icon className="w-5 h-5 text-navy-700 group-hover:text-gold-600 transition-colors duration-300" />
+                  <Icon className="w-5 h-5 text-navy-700 group-hover:text-gold-600 transition-colors duration-300" aria-hidden="true" />
                 </div>
                 <h3 className="font-serif font-bold text-navy-900 group-hover:text-gold-700 transition-colors duration-300">{title}</h3>
                 <p className="mt-2 text-sm text-navy-600 leading-relaxed">{desc}</p>

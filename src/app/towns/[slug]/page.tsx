@@ -58,11 +58,25 @@ export default function TownPage({ params }: Props) {
     },
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://mvcaretaking.com" },
+      { "@type": "ListItem", position: 2, name: "Towns", item: "https://mvcaretaking.com" },
+      { "@type": "ListItem", position: 3, name: town.name, item: `https://mvcaretaking.com/towns/${town.slug}` },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(townJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* Hero */}
       <section className="bg-navy-950 text-white pt-32 pb-20 relative overflow-hidden">

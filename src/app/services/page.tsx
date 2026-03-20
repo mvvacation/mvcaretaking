@@ -189,8 +189,52 @@ This is particularly important for waterfront and estate properties where landsc
 ];
 
 export default function ServicesPage() {
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Martha's Vineyard Caretaking Services",
+    provider: {
+      "@type": "LocalBusiness",
+      name: "MVCaretaking",
+      url: "https://mvcaretaking.com",
+    },
+    areaServed: {
+      "@type": "Place",
+      name: "Martha's Vineyard, MA",
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Caretaking Services",
+      itemListElement: services.map((svc) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: svc.title,
+          description: svc.description.split("\n\n")[0],
+        },
+      })),
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://mvcaretaking.com" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://mvcaretaking.com/services" },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {/* Header */}
       <section className="bg-navy-950 text-white section-padding relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
@@ -221,7 +265,7 @@ export default function ServicesPage() {
                 <div className="lg:col-span-2">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-xl bg-gold-50 border border-gold-200 flex items-center justify-center flex-shrink-0">
-                      <svc.icon className="w-6 h-6 text-gold-600" />
+                      <svc.icon className="w-6 h-6 text-gold-600" aria-hidden="true" />
                     </div>
                     <h2 className="text-2xl sm:text-3xl font-serif font-bold text-navy-900">
                       {svc.title}
