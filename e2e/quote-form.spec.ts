@@ -56,4 +56,44 @@ test.describe("Get a Quote form", () => {
   test("page has correct title", async ({ page }) => {
     await expect(page).toHaveTitle(/Quote/i);
   });
+
+  test("shows error when firstName is empty after blur", async ({ page }) => {
+    const firstName = page.getByLabel(/First Name/i);
+    await firstName.focus();
+    await firstName.blur();
+    await expect(page.getByText("First name is required")).toBeVisible();
+  });
+
+  test("shows error when email is invalid after blur", async ({ page }) => {
+    const email = page.getByLabel(/Email/i);
+    await email.fill("not-an-email");
+    await email.blur();
+    await expect(page.getByText("Please enter a valid email")).toBeVisible();
+  });
+
+  test("shows error when town is empty after blur", async ({ page }) => {
+    const town = page.getByLabel(/Town/i);
+    await town.focus();
+    await town.blur();
+    await expect(page.getByText("Please select a town")).toBeVisible();
+  });
+
+  test("error clears when valid value is entered", async ({ page }) => {
+    const firstName = page.getByLabel(/First Name/i);
+    await firstName.focus();
+    await firstName.blur();
+    await expect(page.getByText("First name is required")).toBeVisible();
+    await firstName.fill("John");
+    await firstName.blur();
+    await expect(page.getByText("First name is required")).not.toBeVisible();
+  });
+
+  test("service checkboxes toggle correctly", async ({ page }) => {
+    const checkbox = page.getByRole("checkbox").first();
+    await expect(checkbox).not.toBeChecked();
+    await checkbox.check();
+    await expect(checkbox).toBeChecked();
+    await checkbox.uncheck();
+    await expect(checkbox).not.toBeChecked();
+  });
 });

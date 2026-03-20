@@ -12,18 +12,13 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log error for monitoring — replace with Sentry/external service in production
-    if (typeof window !== "undefined" && error) {
-      const errorData = {
+    if (error) {
+      console.error("[MVCaretaking Error]", {
         message: error.message,
         digest: error.digest,
         timestamp: new Date().toISOString(),
-        url: window.location.href,
-      };
-      // POST to a future /api/errors endpoint or external service
-      fetch("/api/leads", {
-        method: "HEAD",
-        headers: { "x-error-report": JSON.stringify(errorData) },
-      }).catch(() => { /* silently fail */ });
+        url: typeof window !== "undefined" ? window.location.href : "unknown",
+      });
     }
   }, [error]);
 

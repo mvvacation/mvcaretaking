@@ -21,6 +21,10 @@ function isRateLimited(ip: string): boolean {
     });
     lastCleanup = now;
   }
+  // Hard cap to prevent unbounded memory growth
+  if (rateLimitMap.size > 10000) {
+    rateLimitMap.clear();
+  }
   const entry = rateLimitMap.get(ip);
   if (!entry || now > entry.resetAt) {
     rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });

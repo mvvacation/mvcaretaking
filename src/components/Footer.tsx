@@ -50,9 +50,9 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
+            <h2 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
               Company
-            </h3>
+            </h2>
             <ul className="space-y-3">
               {footerNav.company.map((item) => (
                 <li key={item.name}>
@@ -69,9 +69,9 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
+            <h2 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
               Resources
-            </h3>
+            </h2>
             <ul className="space-y-3">
               {footerNav.resources.map((item) => (
                 <li key={item.name}>
@@ -88,9 +88,9 @@ export default function Footer() {
 
           {/* Towns */}
           <div>
-            <h3 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
+            <h2 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
               MV Towns
-            </h3>
+            </h2>
             <ul className="space-y-3">
               {MV_TOWNS.map((town) => (
                 <li key={town}>
@@ -107,9 +107,9 @@ export default function Footer() {
 
           {/* Network */}
           <div>
-            <h3 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
+            <h2 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
               MV Network
-            </h3>
+            </h2>
             <ul className="space-y-3">
               {footerNav.ecosystem.map((item) => (
                 <li key={item.name}>

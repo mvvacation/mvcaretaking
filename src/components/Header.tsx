@@ -40,14 +40,32 @@ export default function Header() {
         hamburgerRef.current?.focus();
       }
     };
+    const handleFocusTrap = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const focusable = mobileNavRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", handleEscape);
+    document.addEventListener("keydown", handleFocusTrap);
     // Focus first link when mobile menu opens
     const firstLink = mobileNavRef.current?.querySelector("a[href]");
     (firstLink as HTMLAnchorElement)?.focus();
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("keydown", handleFocusTrap);
     };
   }, [mobileOpen]);
 
