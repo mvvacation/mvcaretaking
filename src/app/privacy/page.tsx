@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "Privacy Policy for MVCaretaking.com — how we collect, use, and protect your personal information.",
+  alternates: { canonical: "https://mvcaretaking.com/privacy" },
 };
 
 export default function PrivacyPage() {

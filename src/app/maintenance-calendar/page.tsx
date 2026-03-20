@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Seasonal Home Maintenance Calendar for Martha's Vineyard",
   description:
     "Month-by-month maintenance calendar for Martha's Vineyard second homes. Know exactly what your caretaker should be doing every month to protect your island investment.",
+  alternates: { canonical: "https://mvcaretaking.com/maintenance-calendar" },
   keywords: [
     "Martha's Vineyard home maintenance calendar",
     "MV seasonal property care",

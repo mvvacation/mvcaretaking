@@ -6,9 +6,18 @@ import { leads } from "@/lib/db/schema";
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 const RATE_LIMIT_MAX = 5; // max 5 requests per minute per IP
+const RATE_LIMIT_CLEANUP_INTERVAL = 5 * 60 * 1000; // cleanup every 5 min
+let lastCleanup = Date.now();
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
+  // Periodic cleanup to prevent memory leak
+  if (now - lastCleanup > RATE_LIMIT_CLEANUP_INTERVAL) {
+    rateLimitMap.forEach((entry, key) => {
+      if (now > entry.resetAt) rateLimitMap.delete(key);
+    });
+    lastCleanup = now;
+  }
   const entry = rateLimitMap.get(ip);
   if (!entry || now > entry.resetAt) {
     rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });

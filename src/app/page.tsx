@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   title: "MVCaretaking — Martha's Vineyard Caretaker Directory & Home Watch",
   description:
     "Connect with trusted, vetted caretakers who protect your Martha's Vineyard home year-round. Serving 10,700+ seasonal homes across all 6 MV towns.",
+  alternates: { canonical: "https://mvcaretaking.com" },
   openGraph: {
     title: "MVCaretaking — Martha's Vineyard Caretaker Directory & Home Watch",
     description:

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "What Does a Property Caretaker Do on Martha's Vineyard?",
   description:
     "Everything a Martha's Vineyard caretaker does: property inspections, storm response, winterization, contractor coordination, rental turnover management, concierge services, and more.",
+  alternates: { canonical: "https://mvcaretaking.com/what-is-a-caretaker" },
   keywords: [
     "what does a caretaker do Martha's Vineyard",
     "MV property caretaker responsibilities",

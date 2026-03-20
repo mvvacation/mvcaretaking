@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Thank You — Your Request Was Submitted",
   description:
     "Your caretaker matching inquiry has been submitted. We'll be in touch within 24 hours.",
+  alternates: { canonical: "https://mvcaretaking.com/thank-you" },
 };
 
 export default function ThankYouPage() {

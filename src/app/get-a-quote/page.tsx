@@ -105,6 +105,7 @@ function QuoteForm() {
         <div className="container-narrow">
           <div className="max-w-2xl mx-auto">
             <form onSubmit={handleSubmit} className="space-y-8">
+              <fieldset disabled={submitting} className="space-y-8">
               {/* Contact Information */}
               <fieldset>
                 <legend className="text-xl font-serif font-bold text-navy-900 mb-4">
@@ -322,6 +323,8 @@ function QuoteForm() {
                 </div>
               </fieldset>
 
+              </fieldset>
+
               {/* Honeypot - hidden from real users */}
               <input
                 type="text"
@@ -335,7 +338,7 @@ function QuoteForm() {
               />
 
               {error && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
                   {error}
                 </div>
               )}

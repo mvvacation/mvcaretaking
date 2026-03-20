@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Terms of Service",
   description:
     "Terms of Service for MVCaretaking.com — our free matching and directory service connecting Martha's Vineyard homeowners with independent caretaking professionals.",
+  alternates: { canonical: "https://mvcaretaking.com/terms" },
 };
 
 export default function TermsPage() {

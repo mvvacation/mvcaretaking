@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Martha's Vineyard Caretaking Cost Guide (2025)",
   description:
     "The most transparent caretaking pricing guide on Martha's Vineyard. From $60/visit basic inspections to $50,000/year full estate management. Real market data, no surprises.",
+  alternates: { canonical: "https://mvcaretaking.com/cost-guide" },
   keywords: [
     "Martha's Vineyard caretaking cost",
     "MV property management pricing",

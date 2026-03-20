@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "How It Works",
   description:
     "Three simple steps to get matched with a trusted Martha's Vineyard caretaker. Tell us about your property, we match you with vetted providers, and you choose the best fit.",
+  alternates: { canonical: "https://mvcaretaking.com/how-it-works" },
 };
 
 const steps = [

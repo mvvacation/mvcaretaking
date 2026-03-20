@@ -119,7 +119,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="text-sm text-navy-300 hover:text-white transition-colors duration-300"
                   >
-                    {item.name} ↗
+                    {item.name} <span aria-hidden="true">↗</span><span className="sr-only">(opens in new tab)</span>
                   </a>
                 </li>
               ))}
