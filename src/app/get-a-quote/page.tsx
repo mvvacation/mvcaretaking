@@ -125,9 +125,11 @@ function QuoteForm() {
                       value={form.firstName}
                       onChange={(e) => update("firstName", e.target.value)}
                       onBlur={() => blur("firstName")}
+                      aria-invalid={!!fieldError("firstName")}
+                      aria-describedby={fieldError("firstName") ? "firstName-error" : undefined}
                       className={`w-full rounded-lg border px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent ${fieldError("firstName") ? "border-red-300" : "border-navy-200"}`}
                     />
-                    {fieldError("firstName") && <p className="mt-1 text-xs text-red-500">{fieldError("firstName")}</p>}
+                    {fieldError("firstName") && <p id="firstName-error" role="alert" className="mt-1 text-xs text-red-500">{fieldError("firstName")}</p>}
                   </div>
                   <div>
                     <label
@@ -143,9 +145,11 @@ function QuoteForm() {
                       value={form.lastName}
                       onChange={(e) => update("lastName", e.target.value)}
                       onBlur={() => blur("lastName")}
+                      aria-invalid={!!fieldError("lastName")}
+                      aria-describedby={fieldError("lastName") ? "lastName-error" : undefined}
                       className={`w-full rounded-lg border px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent ${fieldError("lastName") ? "border-red-300" : "border-navy-200"}`}
                     />
-                    {fieldError("lastName") && <p className="mt-1 text-xs text-red-500">{fieldError("lastName")}</p>}
+                    {fieldError("lastName") && <p id="lastName-error" role="alert" className="mt-1 text-xs text-red-500">{fieldError("lastName")}</p>}
                   </div>
                   <div>
                     <label
@@ -161,9 +165,11 @@ function QuoteForm() {
                       value={form.email}
                       onChange={(e) => update("email", e.target.value)}
                       onBlur={() => blur("email")}
+                      aria-invalid={!!fieldError("email")}
+                      aria-describedby={fieldError("email") ? "email-error" : undefined}
                       className={`w-full rounded-lg border px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent ${fieldError("email") ? "border-red-300" : "border-navy-200"}`}
                     />
-                    {fieldError("email") && <p className="mt-1 text-xs text-red-500">{fieldError("email")}</p>}
+                    {fieldError("email") && <p id="email-error" role="alert" className="mt-1 text-xs text-red-500">{fieldError("email")}</p>}
                   </div>
                   <div>
                     <label
@@ -202,6 +208,8 @@ function QuoteForm() {
                       value={form.town}
                       onChange={(e) => update("town", e.target.value)}
                       onBlur={() => blur("town")}
+                      aria-invalid={!!fieldError("town")}
+                      aria-describedby={fieldError("town") ? "town-error" : undefined}
                       className={`w-full rounded-lg border px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent ${fieldError("town") ? "border-red-300" : "border-navy-200"}`}
                     >
                       <option value="">Select a town</option>
@@ -211,6 +219,7 @@ function QuoteForm() {
                         </option>
                       ))}
                     </select>
+                    {fieldError("town") && <p id="town-error" role="alert" className="mt-1 text-xs text-red-500">{fieldError("town")}</p>}
                   </div>
                   <div>
                     <label

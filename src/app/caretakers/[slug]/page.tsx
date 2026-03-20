@@ -30,8 +30,32 @@ export default function CaretakerProfilePage({ params }: Props) {
 
   if (!ct) notFound();
 
+  const caretakerJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: ct.name,
+    description: ct.description,
+    url: `https://mvcaretaking.com/caretakers/${ct.slug}`,
+    telephone: ct.phone || undefined,
+    email: ct.email || undefined,
+    areaServed: ct.townsServed.map((town) => ({
+      "@type": "City",
+      name: `${town}, MA`,
+    })),
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "MA",
+      addressLocality: "Martha's Vineyard",
+      addressCountry: "US",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caretakerJsonLd) }}
+      />
       {/* Header */}
       <section className="bg-navy-950 text-white section-padding pb-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />

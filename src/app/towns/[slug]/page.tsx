@@ -48,8 +48,26 @@ export default function TownPage({ params }: Props) {
     ct.townsServed.includes(town.name as never)
   );
 
+  const townJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    name: `${town.name}, Martha's Vineyard`,
+    description: town.description,
+    url: `https://mvcaretaking.com/towns/${town.slug}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: town.name,
+      addressRegion: "MA",
+      addressCountry: "US",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(townJsonLd) }}
+      />
       {/* Hero */}
       <section className="bg-navy-950 text-white pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />

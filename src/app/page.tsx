@@ -15,7 +15,6 @@ import {
   Camera,
   ChevronRight,
   ArrowRight,
-  Star,
   BookOpen,
   Calendar,
   DollarSign,
@@ -458,13 +457,9 @@ export default function HomePage() {
                 key={testimonial.location}
                 className="relative bg-white/[0.03] backdrop-blur-sm rounded-2xl p-8 border border-white/[0.06]"
               >
-                <div className="flex gap-1 text-gold-400 mb-5">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
-                </div>
+                <span className="text-gold-500/30 text-5xl font-serif leading-none block mb-4">&ldquo;</span>
                 <p className="text-white/80 leading-relaxed font-light italic">
-                  &ldquo;{testimonial.quote}&rdquo;
+                  {testimonial.quote}
                 </p>
                 <footer className="mt-6 flex items-center gap-3">
                   <div className="w-px h-8 bg-gold-500/30" />

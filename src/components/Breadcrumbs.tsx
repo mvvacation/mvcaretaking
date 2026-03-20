@@ -7,9 +7,9 @@ interface Crumb {
 }
 
 export default function Breadcrumbs({ items, dark = false }: { items: Crumb[]; dark?: boolean }) {
-  const base = dark ? "text-navy-400" : "text-navy-400";
-  const hoverClass = dark ? "hover:text-white" : "hover:text-navy-700";
-  const activeClass = dark ? "text-white font-medium" : "text-navy-700 font-medium";
+  const base = dark ? "text-navy-400" : "text-navy-500";
+  const hoverClass = dark ? "hover:text-white" : "hover:text-navy-900";
+  const activeClass = dark ? "text-white font-medium" : "text-navy-900 font-medium";
 
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
