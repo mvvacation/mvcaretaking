@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Error({
   error,
@@ -9,6 +10,23 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  useEffect(() => {
+    // Log error for monitoring — replace with Sentry/external service in production
+    if (typeof window !== "undefined" && error) {
+      const errorData = {
+        message: error.message,
+        digest: error.digest,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+      };
+      // POST to a future /api/errors endpoint or external service
+      fetch("/api/leads", {
+        method: "HEAD",
+        headers: { "x-error-report": JSON.stringify(errorData) },
+      }).catch(() => { /* silently fail */ });
+    }
+  }, [error]);
+
   return (
     <section className="bg-navy-950 text-white min-h-[70vh] flex items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />

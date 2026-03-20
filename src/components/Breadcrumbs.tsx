@@ -21,13 +21,13 @@ export default function Breadcrumbs({ items, dark = false }: { items: Crumb[]; d
         </li>
         {items.map((item, i) => (
           <li key={i} className="flex items-center gap-1.5">
-            <ChevronRight className="w-3.5 h-3.5" />
+            <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
             {item.href ? (
               <Link href={item.href} className={`${hoverClass} transition-colors`}>
                 {item.label}
               </Link>
             ) : (
-              <span className={activeClass}>{item.label}</span>
+              <span className={activeClass} aria-current="page">{item.label}</span>
             )}
           </li>
         ))}

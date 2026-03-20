@@ -23,6 +23,10 @@
   }
 
   /* Premium scrollbar */
+  * {
+    scrollbar-color: #9fb3c8 #f0f4f8;
+    scrollbar-width: thin;
+  }
   ::-webkit-scrollbar {
     width: 8px;
   }

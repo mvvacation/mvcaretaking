@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 
 const navigation = [
@@ -17,6 +18,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const mobileNavRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -39,6 +42,9 @@ export default function Header() {
     };
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", handleEscape);
+    // Focus first link when mobile menu opens
+    const firstLink = mobileNavRef.current?.querySelector("a[href]");
+    (firstLink as HTMLAnchorElement)?.focus();
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
@@ -72,19 +78,27 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`px-4 py-2 text-[13px] font-medium uppercase tracking-wider rounded-lg transition-all duration-300 ${
-                  scrolled
-                    ? "text-navy-600 hover:text-navy-900 hover:bg-navy-50"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`px-4 py-2 text-[13px] font-medium uppercase tracking-wider rounded-lg transition-all duration-300 ${
+                    isActive
+                      ? scrolled
+                        ? "text-navy-900 bg-navy-50"
+                        : "text-white bg-white/10"
+                      : scrolled
+                        ? "text-navy-600 hover:text-navy-900 hover:bg-navy-50"
+                        : "text-white/80 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
             <div className="ml-4 pl-4 border-l border-current/10">
               <Link href="/get-a-quote" className="btn-primary text-xs px-6 py-2.5">
                 Get a Quote
@@ -127,19 +141,27 @@ export default function Header() {
 
         {/* Mobile Nav */}
         {mobileOpen && (
-          <div className="lg:hidden pb-6 animate-fade-in" role="navigation" aria-label="Mobile navigation">
+          <div ref={mobileNavRef} className="lg:hidden pb-6 animate-fade-in" role="navigation" aria-label="Mobile navigation">
             <div className="bg-white/95 backdrop-blur-md rounded-2xl border border-navy-100/50 shadow-luxury-lg p-4 mt-2">
               <div className="flex flex-col gap-1">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="px-4 py-3 text-sm font-medium text-navy-700 hover:bg-navy-50 rounded-xl tracking-wide transition-colors"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                {navigation.map((item) => {
+                  const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`px-4 py-3 text-sm font-medium rounded-xl tracking-wide transition-colors ${
+                        isActive
+                          ? "text-navy-900 bg-navy-50 font-semibold"
+                          : "text-navy-700 hover:bg-navy-50"
+                      }`}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                })}
                 <div className="mt-3 pt-3 border-t border-navy-100">
                   <Link
                     href="/get-a-quote"

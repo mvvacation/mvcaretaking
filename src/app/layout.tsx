@@ -77,6 +77,9 @@ export const metadata: Metadata = {
     ],
   },
   metadataBase: new URL("https://mvcaretaking.com"),
+  other: {
+    "theme-color": "#243b53",
+  },
   alternates: {
     canonical: "/",
   },

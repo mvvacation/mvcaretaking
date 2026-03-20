@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
 import { leads } from "@/lib/db/schema";
+import { MV_TOWNS } from "@/lib/data";
+
+const VALID_TOWNS = MV_TOWNS.map((t) => t.toLowerCase());
 
 // Simple in-memory rate limiting
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -84,18 +87,33 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Validate town against known MV towns
+    if (!VALID_TOWNS.includes(town.toLowerCase())) {
+      return NextResponse.json(
+        { error: "Please select a valid Martha's Vineyard town." },
+        { status: 400 }
+      );
+    }
+
     // Save to database
-    await getDb().insert(leads).values({
-      firstName,
-      lastName,
-      email,
-      phone,
-      town,
-      propertyType,
-      servicesNeeded,
-      message,
-      howHeard,
-    });
+    try {
+      await getDb().insert(leads).values({
+        firstName,
+        lastName,
+        email,
+        phone,
+        town,
+        propertyType,
+        servicesNeeded,
+        message,
+        howHeard,
+      });
+    } catch {
+      return NextResponse.json(
+        { error: "Unable to process your request. Please try again later." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { success: true, message: "Lead submitted successfully." },

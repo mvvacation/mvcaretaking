@@ -36,8 +36,8 @@ export default function CaretakerProfilePage({ params }: Props) {
     name: ct.name,
     description: ct.description,
     url: `https://mvcaretaking.com/caretakers/${ct.slug}`,
-    telephone: ct.phone || undefined,
-    email: ct.email || undefined,
+    ...(ct.phone && { telephone: ct.phone }),
+    ...(ct.email && { email: ct.email }),
     areaServed: ct.townsServed.map((town) => ({
       "@type": "City",
       name: `${town}, MA`,

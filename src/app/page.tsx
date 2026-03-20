@@ -104,7 +104,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-navy-950">
           <Image
             src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80"
-            alt=""
+            alt="Luxury Martha's Vineyard home with manicured grounds"
             fill
             priority
             className="object-cover opacity-25"
