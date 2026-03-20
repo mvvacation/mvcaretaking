@@ -51,9 +51,7 @@ export const TOWN_DATA: Record<
   string,
   {
     slug: string;
-    avgSalePrice: string;
     character: string;
-    priceRange: string;
     description: string;
     caretakingFocus: string;
     uniqueChallenges: string[];
@@ -63,10 +61,8 @@ export const TOWN_DATA: Record<
 > = {
   Edgartown: {
     slug: "edgartown",
-    avgSalePrice: "$3,557,847",
     character:
       "Martha's Vineyard's volume leader and historic harbor town. Edgartown combines a bustling downtown, world-class harbor, and some of the island's most prestigious waterfront estates in Katama and along the outer harbor.",
-    priceRange: "$1M–$20M+",
     description:
       "With approximately 1,400 registered short-term rentals — the most of any MV town — Edgartown properties require particularly attentive caretaking. The town's mix of historic in-town homes, sprawling Katama estates, and waterfront properties each present unique challenges. Salt air corrosion on harbor-facing homes, high guest turnover during peak season, and exposure to southeast storms make professional caretaking essential for Edgartown homeowners.",
     caretakingFocus:
@@ -91,10 +87,8 @@ export const TOWN_DATA: Record<
   },
   "Oak Bluffs": {
     slug: "oak-bluffs",
-    avgSalePrice: "$1,200,000",
     character:
       "Martha's Vineyard's most accessible entry point and the island's cultural heartbeat. Oak Bluffs is home to the iconic Gingerbread cottages, a vibrant African-American community with century-old roots, and the island's busiest commercial district.",
-    priceRange: "$500K–$3M",
     description:
       "Oak Bluffs represents the most diverse property market on the Vineyard, from modest cottages to substantial waterfront homes. The town's rental-driven investment profile means many properties function as income-producing assets requiring professional caretaking. With relatively more affordable entry prices, Oak Bluffs attracts first-time MV buyers who are often unfamiliar with island-specific caretaking needs — making education and guidance particularly valuable.",
     caretakingFocus:
@@ -119,10 +113,8 @@ export const TOWN_DATA: Record<
   },
   "Vineyard Haven": {
     slug: "vineyard-haven",
-    avgSalePrice: "$1,750,000",
     character:
       "The island's year-round commercial hub and primary ferry port. Vineyard Haven (officially Tisbury) is the only dry town on MV and the most practical base for year-round island living, with essential services, a working harbor, and steady property values.",
-    priceRange: "$800K–$6M",
     description:
       "Vineyard Haven properties benefit from the town's year-round infrastructure but face unique challenges from busy harbor activity and seasonal traffic. The town recently capped short-term rentals at 75 nights per year with $115 annual registration fees — a regulatory shift that affects how properties are managed. Caretakers serving Vineyard Haven need strong relationships with the town's contractor base and familiarity with the evolving STR regulatory landscape.",
     caretakingFocus:
@@ -147,10 +139,8 @@ export const TOWN_DATA: Record<
   },
   Chilmark: {
     slug: "chilmark",
-    avgSalePrice: "$6,435,368",
     character:
       "Martha's Vineyard's most exclusive address, with the island's highest property values. Chilmark is defined by rolling hills, stone walls, pristine beaches (Lucy Vincent, Squibnocket), and large estate properties set on multi-acre parcels.",
-    priceRange: "$2M–$40M+",
     description:
       "Chilmark represents the pinnacle of MV real estate and demands the highest level of caretaking service. Properties here are typically large estate compounds with extensive grounds, multiple structures, private roads, and complex systems (pools, generators, wells, septic). The town is considering a 95-day annual STR cap. At these property values — averaging over $6.4M — the cost of professional caretaking is a rounding error compared to the cost of neglect.",
     caretakingFocus:
@@ -176,10 +166,8 @@ export const TOWN_DATA: Record<
   },
   "West Tisbury": {
     slug: "west-tisbury",
-    avgSalePrice: "$2,500,000",
     character:
       "The agricultural heart of Martha's Vineyard. West Tisbury combines rural New England charm with increasing luxury development — it's home to the Farmers' Market, Alley's General Store, and large parcels with inland privacy that appeal to writers, artists, and families seeking seclusion.",
-    priceRange: "$1M–$8M+",
     description:
       "West Tisbury passed MV's first comprehensive STR restrictions in April 2024: a two-night minimum, one STR per owner, and a 30-day owner-occupancy requirement. These regulations signal a shift back toward traditional second-home use — increasing the need for year-round caretaking over short-term rental management. The town's large parcels and wooded properties create unique challenges around landscaping, deer management, well/septic systems, and wildfire risk during dry periods.",
     caretakingFocus:
@@ -204,10 +192,8 @@ export const TOWN_DATA: Record<
   },
   Aquinnah: {
     slug: "aquinnah",
-    avgSalePrice: "$2,500,000",
     character:
       "Martha's Vineyard's most remote and most naturally dramatic town. Home to the iconic Gay Head Cliffs, the Wampanoag Tribe of Gay Head (Aquinnah), and some of the island's most exposed oceanfront properties. The smallest MV town by population and housing stock.",
-    priceRange: "$1.5M–$10M+",
     description:
       "Aquinnah is the most challenging environment for property caretaking on Martha's Vineyard. Cliff-edge oceanfront homes face extreme weather exposure, including direct Atlantic storm impact, erosion, and relentless salt air. The town's small size means very limited local contractor availability — caretakers must often bring resources from down-island towns. Properties here tend to be either dramatic cliff-top estates or secluded inland retreats, both requiring specialized attention.",
     caretakingFocus:
@@ -266,164 +252,7 @@ export const PRICING_DATA = {
   },
 };
 
-// Mock caretakers for initial build (replace with DB queries later)
-export const MOCK_CARETAKERS = [
-  {
-    id: 1,
-    slug: "vineyard-home-watch",
-    name: "Vineyard Home Watch",
-    tagline: "Your eyes on the island, 365 days a year",
-    description:
-      "With over 15 years of experience on Martha's Vineyard, Vineyard Home Watch provides comprehensive property monitoring and caretaking services. Our team of year-round islanders ensures your home is protected through every season — from nor'easters to summer heat waves. We deliver detailed photo reports within 24 hours of every visit.",
-    townsServed: ["Edgartown", "Oak Bluffs", "Vineyard Haven"],
-    services: [
-      "Property Inspections",
-      "Storm & Emergency Response",
-      "Seasonal Opening & Closing",
-      "Contractor Coordination",
-    ],
-    yearFounded: 2009,
-    bondedInsured: true,
-    acceptingClients: true,
-    differentiator: "24hr Digital Reports",
-    phone: "(508) 555-0101",
-    email: "info@vineyardhomewatch.com",
-    website: "https://vineyardhomewatch.com",
-    imageUrl: null,
-    featured: true,
-  },
-  {
-    id: 2,
-    slug: "island-estate-care",
-    name: "Island Estate Care",
-    tagline: "Luxury caretaking for discerning homeowners",
-    description:
-      "Island Estate Care specializes in high-end property management for Martha's Vineyard's most prestigious estates. Our concierge-level service means your home is always guest-ready, whether you're arriving for a weekend or hosting a summer-long rental. White-glove service from a team that understands island living.",
-    townsServed: ["Chilmark", "West Tisbury", "Aquinnah"],
-    services: [
-      "Property Inspections",
-      "Concierge & Arrival Prep",
-      "Rental Turnover Management",
-      "Security Monitoring",
-      "Landscaping Oversight",
-    ],
-    yearFounded: 2015,
-    bondedInsured: true,
-    acceptingClients: true,
-    differentiator: "Luxury Estates Specialist",
-    phone: "(508) 555-0202",
-    email: "hello@islandestatecare.com",
-    website: "https://islandestatecare.com",
-    imageUrl: null,
-    featured: true,
-  },
-  {
-    id: 3,
-    slug: "mv-coastal-caretaking",
-    name: "MV Coastal Caretaking",
-    tagline: "Protecting waterfront properties since 2012",
-    description:
-      "MV Coastal Caretaking is the island's specialist for waterfront and beachfront properties. We understand the unique challenges that salt air, storm surge, and coastal erosion pose to your investment. Our team includes a licensed contractor, ensuring we can handle emergency repairs on the spot.",
-    townsServed: [
-      "Edgartown",
-      "Oak Bluffs",
-      "Vineyard Haven",
-      "Chilmark",
-      "West Tisbury",
-      "Aquinnah",
-    ],
-    services: [
-      "Property Inspections",
-      "Storm & Emergency Response",
-      "Seasonal Opening & Closing",
-      "Contractor Coordination",
-      "Security Monitoring",
-    ],
-    yearFounded: 2012,
-    bondedInsured: true,
-    acceptingClients: false,
-    differentiator: "Licensed Contractor On Staff",
-    phone: "(508) 555-0303",
-    email: "info@mvcoastal.com",
-    website: "https://mvcoastal.com",
-    imageUrl: null,
-    featured: true,
-  },
-  {
-    id: 4,
-    slug: "oak-bluffs-property-services",
-    name: "Oak Bluffs Property Services",
-    tagline: "Community rooted, professionally managed",
-    description:
-      "A family-run operation serving the Oak Bluffs community for three generations. We combine old-fashioned island reliability with modern property management technology. Our team knows every tradesperson on the island by name.",
-    townsServed: ["Oak Bluffs", "Vineyard Haven"],
-    services: [
-      "Property Inspections",
-      "Seasonal Opening & Closing",
-      "Contractor Coordination",
-      "Landscaping Oversight",
-    ],
-    yearFounded: 1998,
-    bondedInsured: true,
-    acceptingClients: true,
-    differentiator: "4th-Gen Islander Family",
-    phone: "(508) 555-0404",
-    email: "contact@obpropertyservices.com",
-    website: "https://obpropertyservices.com",
-    imageUrl: null,
-    featured: false,
-  },
-  {
-    id: 5,
-    slug: "green-island-caretakers",
-    name: "Green Island Caretakers",
-    tagline: "Eco-friendly property care for a sustainable island",
-    description:
-      "Green Island Caretakers is Martha's Vineyard's first eco-certified caretaking company. We use sustainable products, energy-efficient practices, and work with the MV Commission on conservation-friendly property management.",
-    townsServed: ["West Tisbury", "Chilmark", "Aquinnah"],
-    services: [
-      "Property Inspections",
-      "Seasonal Opening & Closing",
-      "Landscaping Oversight",
-      "Concierge & Arrival Prep",
-    ],
-    yearFounded: 2018,
-    bondedInsured: true,
-    acceptingClients: true,
-    differentiator: "Eco-Certified",
-    phone: "(508) 555-0505",
-    email: "hello@greenislandmv.com",
-    website: "https://greenislandmv.com",
-    imageUrl: null,
-    featured: false,
-  },
-  {
-    id: 6,
-    slug: "mv-guardian-services",
-    name: "MV Guardian Services",
-    tagline: "Security-first property management",
-    description:
-      "Founded by a former law enforcement professional, MV Guardian Services brings a security-first approach to property caretaking. We coordinate directly with local police and offer the most thorough security monitoring on the island.",
-    townsServed: ["Edgartown", "Oak Bluffs", "Vineyard Haven", "West Tisbury"],
-    services: [
-      "Property Inspections",
-      "Security Monitoring",
-      "Storm & Emergency Response",
-      "Contractor Coordination",
-    ],
-    yearFounded: 2016,
-    bondedInsured: true,
-    acceptingClients: true,
-    differentiator: "Ex-Law Enforcement Team",
-    phone: "(508) 555-0606",
-    email: "info@mvguardian.com",
-    website: "https://mvguardian.com",
-    imageUrl: null,
-    featured: false,
-  },
-];
-
-export const MOCK_BLOG_POSTS = [
+export const BLOG_POSTS = [
   {
     slug: "do-i-need-a-caretaker-marthas-vineyard",
     title: "Do I Need a Caretaker for My Martha's Vineyard Home?",

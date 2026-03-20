@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { MOCK_BLOG_POSTS } from "@/lib/data";
+import { BLOG_POSTS } from "@/lib/data";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 type Props = {
@@ -742,11 +742,11 @@ Our caretaker network stays current on every town's regulations and can help you
 };
 
 export function generateStaticParams() {
-  return MOCK_BLOG_POSTS.map((post) => ({ slug: post.slug }));
+  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
 }
 
 export function generateMetadata({ params }: Props): Metadata {
-  const post = MOCK_BLOG_POSTS.find((p) => p.slug === params.slug);
+  const post = BLOG_POSTS.find((p) => p.slug === params.slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -765,7 +765,7 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export default function BlogPostPage({ params }: Props) {
-  const post = MOCK_BLOG_POSTS.find((p) => p.slug === params.slug);
+  const post = BLOG_POSTS.find((p) => p.slug === params.slug);
   if (!post) notFound();
 
   const content = blogContent[params.slug] || "";

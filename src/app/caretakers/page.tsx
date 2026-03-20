@@ -1,31 +1,16 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
-import { MOCK_CARETAKERS, MV_TOWNS, SERVICE_CATEGORIES } from "@/lib/data";
+import type { Metadata } from "next";
+import { Shield, Award, MapPin, Camera, Phone, ArrowRight } from "lucide-react";
+import { MV_TOWNS, SERVICE_CATEGORIES } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: "Caretaker Directory — Martha's Vineyard Caretaking Professionals",
+  description:
+    "Find vetted, bonded caretaking professionals on Martha's Vineyard. Our directory connects you with trusted, year-round island-based property caretakers serving all 6 MV towns.",
+  alternates: { canonical: "https://mvcaretaking.com/caretakers" },
+};
 
 export default function CaretakersPage() {
-  const [townFilter, setTownFilter] = useState<string>("");
-  const [serviceFilter, setServiceFilter] = useState<string[]>([]);
-  const [acceptingOnly, setAcceptingOnly] = useState(false);
-
-  const filtered = MOCK_CARETAKERS.filter((ct) => {
-    if (townFilter && !ct.townsServed.includes(townFilter)) return false;
-    if (
-      serviceFilter.length > 0 &&
-      !serviceFilter.some((s) => ct.services.includes(s))
-    )
-      return false;
-    if (acceptingOnly && !ct.acceptingClients) return false;
-    return true;
-  });
-
-  function toggleService(svc: string) {
-    setServiceFilter((prev) =>
-      prev.includes(svc) ? prev.filter((s) => s !== svc) : [...prev, svc]
-    );
-  }
-
   return (
     <>
       {/* Header */}
@@ -37,175 +22,112 @@ export default function CaretakersPage() {
             Martha&apos;s Vineyard Caretaker Directory
           </h1>
           <p className="mt-6 text-lg text-navy-300 max-w-2xl mx-auto">
-            Browse vetted, island-based caretaking professionals. Filter by
-            town, service type, and availability.
+            We&apos;re building the island&apos;s most trusted network of vetted,
+            bonded caretaking professionals — serving all 6 MV towns.
           </p>
         </div>
       </section>
 
-      {/* Filters + Grid */}
-      <section className="section-padding pt-8">
+      {/* Directory Coming Soon */}
+      <section className="section-padding">
         <div className="container-narrow">
-          {/* Filter Bar */}
-          <div className="bg-white rounded-2xl border border-navy-100/50 p-6 mb-8 shadow-luxury">
-            <div className="flex flex-col md:flex-row gap-6">
-              {/* Town filter */}
-              <div className="flex-1">
-                <label
-                  htmlFor="town-filter"
-                  className="block text-sm font-medium text-navy-700 mb-1"
-                >
-                  Filter by Town
-                </label>
-                <select
-                  id="town-filter"
-                  value={townFilter}
-                  onChange={(e) => setTownFilter(e.target.value)}
-                    className="w-full rounded-xl border border-navy-200 px-3 py-2 text-sm text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400"
-                >
-                  <option value="">All Towns</option>
-                  {MV_TOWNS.map((town) => (
-                    <option key={town} value={town}>
-                      {town}
-                    </option>
-                  ))}
-                </select>
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="bg-gradient-to-br from-navy-50 to-gold-50/30 rounded-3xl p-12 border border-navy-100/50">
+              <div className="w-20 h-20 rounded-2xl bg-navy-900 flex items-center justify-center mx-auto mb-8 shadow-luxury">
+                <Shield className="w-8 h-8 text-gold-400" />
               </div>
-
-              {/* Accepting toggle */}
-              <div className="flex items-end">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={acceptingOnly}
-                    onChange={(e) => setAcceptingOnly(e.target.checked)}
-                    className="w-4 h-4 rounded border-navy-300 text-gold-500 focus:ring-gold-400"
-                  />
-                  <span className="text-sm text-navy-700">
-                    Accepting New Clients
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            {/* Service type checkboxes */}
-            <div className="mt-4">
-              <p className="text-sm font-medium text-navy-700 mb-2">
-                Service Type
+              <h2 className="text-3xl font-serif font-bold text-navy-900 mb-4">
+                Directory Launching Soon
+              </h2>
+              <p className="text-navy-600 leading-relaxed max-w-xl mx-auto mb-8">
+                We&apos;re currently vetting and onboarding caretaking professionals
+                across Martha&apos;s Vineyard. Every provider in our directory will be
+                verified for bonding, insurance, and year-round island residency.
               </p>
-              <div className="flex flex-wrap gap-2">
-                {SERVICE_CATEGORIES.map((svc) => (
-                  <button
-                    key={svc}
-                    onClick={() => toggleService(svc)}
-                    className={`text-xs px-3 py-1.5 rounded-full border transition-colors duration-300 ${
-                      serviceFilter.includes(svc)
-                        ? "bg-gold-500 text-white border-gold-500"
-                        : "bg-white text-navy-600 border-navy-200 hover:border-gold-300"
-                    }`}
-                  >
-                    {svc}
-                  </button>
-                ))}
-              </div>
+              <p className="text-navy-600 leading-relaxed max-w-xl mx-auto mb-10">
+                In the meantime, submit your property details and we&apos;ll
+                personally match you with a trusted caretaker for your town and needs.
+              </p>
+              <Link href="/get-a-quote" className="btn-primary gap-2 text-sm px-8 py-4">
+                Get Matched With a Caretaker <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
 
-          {/* Results count */}
-          <p className="text-sm text-navy-500 mb-6">
-            Showing {filtered.length} provider
-            {filtered.length !== 1 ? "s" : ""}
-          </p>
-
-          {/* Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((ct) => (
-              <div
-                key={ct.id}
-                className="bg-white rounded-2xl border border-navy-100/50 p-6 hover:shadow-luxury transition-shadow duration-300 flex flex-col"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <h3 className="text-lg font-semibold text-navy-900">
-                    {ct.name}
-                  </h3>
-                  {ct.bondedInsured && (
-                    <span className="text-[10px] font-medium bg-sage-50 text-sage-500 px-2 py-0.5 rounded-full whitespace-nowrap">
-                      Bonded & Insured
-                    </span>
-                  )}
+          {/* What We Verify */}
+          <div className="mt-20">
+            <h2 className="text-2xl font-serif font-bold text-navy-900 text-center mb-12">
+              Every Provider Is Verified For
+            </h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { icon: Shield, title: "Bonded & Insured", desc: "Full liability coverage verified before listing." },
+                { icon: Award, title: "NHWA Standards", desc: "Background checks and professional reporting protocols." },
+                { icon: MapPin, title: "Year-Round Residency", desc: "On-island full-time — no mainland-based operators." },
+                { icon: Camera, title: "Digital Reporting", desc: "Timestamped photo reports within 24 hours of every visit." },
+              ].map(({ icon: Icon, title, desc }) => (
+                <div key={title} className="text-center">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-navy-900 mb-5 shadow-luxury">
+                    <Icon className="w-6 h-6 text-gold-400" />
+                  </div>
+                  <h3 className="font-serif font-bold text-navy-900">{title}</h3>
+                  <p className="mt-2 text-sm text-navy-600 leading-relaxed">{desc}</p>
                 </div>
-                <p className="mt-1 text-sm text-navy-500">{ct.tagline}</p>
+              ))}
+            </div>
+          </div>
 
-                {/* Towns */}
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {ct.townsServed.map((town) => (
-                    <span
-                      key={town}
-                      className="text-xs bg-navy-50 text-navy-600 px-2 py-0.5 rounded-full"
+          {/* Towns & Services We Cover */}
+          <div className="mt-20 grid md:grid-cols-2 gap-12">
+            <div className="bg-white rounded-2xl border border-navy-100/50 p-8">
+              <h3 className="text-xl font-serif font-bold text-navy-900 mb-6">
+                Towns We Serve
+              </h3>
+              <ul className="space-y-3">
+                {MV_TOWNS.map((town) => (
+                  <li key={town} className="flex items-center gap-3">
+                    <MapPin className="w-4 h-4 text-gold-500 flex-shrink-0" />
+                    <Link
+                      href={`/towns/${town.toLowerCase().replace(/\s+/g, "-")}`}
+                      className="text-navy-700 hover:text-gold-600 transition-colors"
                     >
                       {town}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Meta */}
-                <div className="mt-4 flex items-center gap-2 flex-wrap">
-                  <span className="text-xs font-medium bg-gold-50 text-gold-700 px-2.5 py-1 rounded-full">
-                    {ct.differentiator}
-                  </span>
-                  <span className="text-xs text-navy-400">
-                    Est. {ct.yearFounded}
-                  </span>
-                  {!ct.acceptingClients && (
-                    <span className="text-xs text-red-500 font-medium">
-                      Waitlist Only
-                    </span>
-                  )}
-                </div>
-
-                <div className="mt-auto pt-6">
-                  <Link
-                    href={`/caretakers/${ct.slug}`}
-                    className="block text-center btn-outline text-sm py-2"
-                  >
-                    View Profile →
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {filtered.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-navy-500">
-                No caretakers match your current filters. Try adjusting your
-                criteria.
-              </p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          )}
-
-          {/* CTA */}
-          <div className="mt-16 text-center bg-navy-50 rounded-2xl p-8">
-            <h2 className="text-2xl font-serif font-bold text-navy-900">
-              Not Sure Which Provider Is Right?
-            </h2>
-            <p className="mt-3 text-navy-600 max-w-lg mx-auto">
-              Submit one inquiry and we&apos;ll match you with the best
-              caretakers for your property, town, and needs.
-            </p>
-            <Link href="/get-a-quote" className="btn-primary mt-6">
-              Get Matched Free →
-            </Link>
+            <div className="bg-white rounded-2xl border border-navy-100/50 p-8">
+              <h3 className="text-xl font-serif font-bold text-navy-900 mb-6">
+                Services Covered
+              </h3>
+              <ul className="space-y-3">
+                {SERVICE_CATEGORIES.map((svc) => (
+                  <li key={svc} className="flex items-center gap-3">
+                    <span className="w-2 h-2 rounded-full bg-gold-500 flex-shrink-0" />
+                    <span className="text-navy-700">{svc}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          {/* Disclaimer */}
-          <p className="mt-8 text-xs text-navy-400 leading-relaxed text-center max-w-2xl mx-auto">
-            Listings are provided for informational purposes. While we verify
-            basic credentials, homeowners are responsible for independently
-            evaluating providers, confirming insurance and bonding, and
-            conducting their own due diligence before hiring. MVCaretaking.com
-            does not employ, supervise, or control any listed provider.
-          </p>
+          {/* Are You a Caretaker CTA */}
+          <div className="mt-20 text-center bg-navy-950 rounded-3xl p-12 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-950 to-navy-900 opacity-90" />
+            <div className="relative z-10">
+              <h2 className="text-2xl font-serif font-bold text-white mb-4">
+                Are You a Martha&apos;s Vineyard Caretaker?
+              </h2>
+              <p className="text-navy-400 max-w-lg mx-auto mb-8">
+                We&apos;re actively onboarding bonded, insured, year-round island
+                professionals. Get listed in the Vineyard&apos;s premier caretaker directory.
+              </p>
+              <Link href="/get-a-quote" className="btn-primary gap-2">
+                <Phone className="w-4 h-4" /> Apply to Join Our Network
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </>

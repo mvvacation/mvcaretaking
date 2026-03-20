@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Home } from "lucide-react";
-import { TOWN_DATA, MOCK_CARETAKERS, PRICING_DATA, MARKET_STATS } from "@/lib/data";
+import { Home, ArrowRight } from "lucide-react";
+import { TOWN_DATA, PRICING_DATA, MARKET_STATS } from "@/lib/data";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 type Props = {
@@ -26,7 +26,7 @@ export function generateMetadata({ params }: Props): Metadata {
   if (!town) return {};
   return {
     title: `Caretaking Services in ${town.name}, Martha's Vineyard`,
-    description: `Professional property caretaking in ${town.name}, MV. Average home value: ${town.avgSalePrice}. ${town.uniqueChallenges[0]}. Find vetted, bonded caretakers serving ${town.name}.`,
+    description: `Professional property caretaking in ${town.name}, MV. ${town.uniqueChallenges[0]}. Find vetted, bonded caretakers serving ${town.name}.`,
     keywords: [
       `${town.name} caretaker`,
       `${town.name} property management`,
@@ -43,10 +43,6 @@ export function generateMetadata({ params }: Props): Metadata {
 export default function TownPage({ params }: Props) {
   const town = getTownBySlug(params.slug);
   if (!town) notFound();
-
-  const caretakersInTown = MOCK_CARETAKERS.filter((ct) =>
-    ct.townsServed.includes(town.name as never)
-  );
 
   const townJsonLd = {
     "@context": "https://schema.org",
@@ -83,20 +79,6 @@ export default function TownPage({ params }: Props) {
             <p className="text-xl text-navy-300 leading-relaxed mb-8 max-w-3xl">
               {town.character}
             </p>
-            <div className="flex flex-wrap gap-6 text-sm">
-              <div className="bg-navy-900/50 border border-navy-700/50 rounded-2xl px-5 py-3">
-                <span className="text-navy-400 block">Avg. Sale Price</span>
-                <span className="text-2xl font-bold text-white">{town.avgSalePrice}</span>
-              </div>
-              <div className="bg-navy-900/50 border border-navy-700/50 rounded-2xl px-5 py-3">
-                <span className="text-navy-400 block">Price Range</span>
-                <span className="text-2xl font-bold text-white">{town.priceRange}</span>
-              </div>
-              <div className="bg-navy-900/50 border border-navy-700/50 rounded-2xl px-5 py-3">
-                <span className="text-navy-400 block">Active Caretakers</span>
-                <span className="text-2xl font-bold text-white">{caretakersInTown.length}</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -169,7 +151,7 @@ export default function TownPage({ params }: Props) {
             Caretaking Costs in {town.name}
           </h2>
           <p className="text-navy-600 text-center max-w-2xl mx-auto mb-12">
-            Based on current market data for {town.name} properties in the {town.priceRange} range.
+            Typical market ranges for {town.name} properties.
             Actual costs vary by property size, services, and complexity.
           </p>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -206,73 +188,21 @@ export default function TownPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Caretakers Serving This Town */}
+      {/* Find a Caretaker CTA */}
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-navy-900 mb-4 text-center">
-            Caretakers Serving {town.name}
-          </h2>
-          <p className="text-navy-600 text-center max-w-2xl mx-auto mb-12">
-            Every caretaker on MVCaretaking is bonded, insured, and verified as a year-round island professional.
-          </p>
-          {caretakersInTown.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {caretakersInTown.map((ct) => (
-                <div
-                  key={ct.slug}
-                  className="bg-white border border-navy-100/50 rounded-2xl p-6 hover:shadow-luxury transition-shadow duration-300"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-lg font-semibold text-navy-900">{ct.name}</h3>
-                      <p className="text-sm text-navy-500">{ct.tagline}</p>
-                    </div>
-                    {ct.acceptingClients && (
-                      <span className="bg-sage-100 text-sage-700 text-xs font-medium px-2 py-1 rounded-full whitespace-nowrap">
-                        Accepting Clients
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {ct.services.slice(0, 3).map((svc) => (
-                      <span
-                        key={svc}
-                        className="bg-gold-50 text-gold-700 text-xs px-2 py-1 rounded"
-                      >
-                        {svc}
-                      </span>
-                    ))}
-                    {ct.services.length > 3 && (
-                      <span className="text-xs text-navy-400">
-                        +{ct.services.length - 3} more
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-navy-600 mb-4">
-                    <span>Est. {ct.yearFounded}</span>
-                    <span className="text-navy-300">•</span>
-                    <span>{ct.bondedInsured ? "Bonded & Insured" : ""}</span>
-                  </div>
-                  <Link
-                    href={`/caretakers/${ct.slug}`}
-                    className="btn-outline text-sm w-full text-center block"
-                  >
-                    View Full Profile
-                  </Link>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12 bg-sand-50 rounded-2xl">
-              <p className="text-navy-600 mb-4">
-                We&apos;re actively vetting caretakers in {town.name}. Want to be notified when new
-                caretakers are available?
-              </p>
-              <Link href="/get-a-quote" className="btn-primary">
-                Get Notified
-              </Link>
-            </div>
-          )}
+          <div className="text-center max-w-2xl mx-auto bg-gradient-to-br from-navy-50 to-gold-50/30 rounded-3xl p-12 border border-navy-100/50">
+            <h2 className="text-3xl font-serif font-bold text-navy-900 mb-4">
+              Find a Caretaker in {town.name}
+            </h2>
+            <p className="text-navy-600 mb-8">
+              Submit your property details and we&apos;ll match you with vetted,
+              bonded caretaking professionals who serve {town.name}.
+            </p>
+            <Link href="/get-a-quote" className="btn-primary gap-2">
+              Get Matched Free <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -280,13 +210,9 @@ export default function TownPage({ params }: Props) {
       <section className="section-padding bg-navy-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-serif font-bold text-navy-900 mb-12 text-center">
-            {town.name} by the Numbers
+            Martha&apos;s Vineyard by the Numbers
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-2xl p-6 text-center">
-              <p className="text-3xl font-bold text-navy-900">{town.avgSalePrice}</p>
-              <p className="text-sm text-navy-600 mt-1">Avg. Sale Price</p>
-            </div>
+          <div className="grid sm:grid-cols-3 gap-6">
             <div className="bg-white rounded-2xl p-6 text-center">
               <p className="text-3xl font-bold text-navy-900">{MARKET_STATS.seasonalHomes}</p>
               <p className="text-sm text-navy-600 mt-1">Seasonal Homes Island-Wide</p>

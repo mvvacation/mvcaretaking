@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BookOpen } from "lucide-react";
-import { MOCK_BLOG_POSTS } from "@/lib/data";
+import { BLOG_POSTS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Blog — Martha's Vineyard Caretaking Tips & Guides",
@@ -32,7 +32,7 @@ export default function BlogIndexPage() {
       <section className="section-padding">
         <div className="container-narrow">
           <div className="grid md:grid-cols-2 gap-8">
-            {MOCK_BLOG_POSTS.map((post) => (
+            {BLOG_POSTS.map((post) => (
               <article
                 key={post.slug}
                 className="bg-white rounded-2xl border border-navy-100/50 overflow-hidden hover:shadow-luxury transition-shadow duration-300"

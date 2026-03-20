@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { MOCK_CARETAKERS, MARKET_STATS } from "@/lib/data";
+import { MARKET_STATS } from "@/lib/data";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import {
   Shield,
@@ -94,8 +94,6 @@ const steps = [
 ];
 
 export default function HomePage() {
-  const featured = MOCK_CARETAKERS.filter((c) => c.featured);
-
   return (
     <>
       {/* ============ HERO ============ */}
@@ -337,83 +335,60 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============ FEATURED CARETAKERS ============ */}
+      {/* ============ FIND YOUR CARETAKER CTA ============ */}
       <section className="section-padding bg-white">
         <div className="container-narrow">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="section-label">Our Network</span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-navy-900 text-balance">
-              Featured Professionals
+              Trusted Island Professionals
             </h2>
             <p className="mt-6 text-navy-500 text-lg font-light">
-              Vetted, year-round island residents who know Martha&apos;s Vineyard intimately.
+              We&apos;re building the Vineyard&apos;s most trusted caretaker network — every
+              provider is vetted for bonding, insurance, and year-round island residency.
             </p>
             <div className="divider-gold mt-8" />
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {featured.map((ct) => (
-              <div
-                key={ct.id}
-                className="group rounded-2xl border border-navy-100/50 p-8 hover:shadow-luxury-lg transition-all duration-500 bg-white"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-lg font-serif font-bold text-navy-900">
-                    {ct.name}
-                  </h3>
-                  {ct.bondedInsured && (
-                    <span className="flex items-center gap-1 text-xs font-medium bg-gold-50 text-gold-700 px-2.5 py-1 rounded-full whitespace-nowrap border border-gold-200">
-                      <Shield className="w-3 h-3" /> Verified
-                    </span>
-                  )}
+          <div className="grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+            {[
+              { icon: Shield, title: "Bonded & Insured", desc: "Verified liability coverage for your peace of mind." },
+              { icon: MapPin, title: "Year-Round Islanders", desc: "On-island residents who respond in hours, not days." },
+              { icon: Camera, title: "24hr Photo Reports", desc: "Timestamped documentation after every property visit." },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-navy-900 mb-5 shadow-luxury">
+                  <Icon className="w-6 h-6 text-gold-400" />
                 </div>
-                <p className="text-sm text-navy-500 italic">{ct.tagline}</p>
-
-                <div className="mt-5 flex flex-wrap gap-1.5">
-                  {ct.townsServed.map((town) => (
-                    <span
-                      key={town}
-                      className="text-xs bg-navy-50 text-navy-600 px-2.5 py-1 rounded-lg"
-                    >
-                      {town}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-5 flex items-center gap-2">
-                  <span className="text-xs font-medium bg-gold-50 text-gold-700 px-2.5 py-1 rounded-lg">
-                    {ct.differentiator}
-                  </span>
-                  <span className="text-xs text-navy-400">
-                    Est. {ct.yearFounded}
-                  </span>
-                </div>
-
-                <Link
-                  href={`/caretakers/${ct.slug}`}
-                  className="mt-7 flex items-center justify-center gap-2 w-full py-3 text-sm font-medium text-navy-700 border border-navy-200 rounded-xl hover:bg-navy-50 hover:border-navy-300 transition-all duration-300 tracking-wide uppercase"
-                >
-                  View Profile <ChevronRight className="w-3.5 h-3.5" />
-                </Link>
+                <h3 className="font-serif font-bold text-navy-900">{title}</h3>
+                <p className="mt-2 text-sm text-navy-600 leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
 
           <div className="mt-12 text-center">
-            <Link href="/caretakers" className="btn-primary gap-2">
-              View All Caretakers <ArrowRight className="w-4 h-4" />
+            <Link href="/get-a-quote" className="btn-primary gap-2">
+              Get Matched With a Caretaker <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ============ SOCIAL PROOF ============ */}
+      {/* ============ MARKET DATA ============ */}
       <section className="section-padding bg-navy-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent" />
 
         <div className="relative z-10 container-narrow">
           {/* Stats */}
+          <div className="text-center mb-12">
+            <span className="section-label text-gold-400">The MV Market</span>
+            <h2 className="mt-4 text-3xl sm:text-4xl font-serif font-bold text-white">
+              Why Caretaking Matters Here
+            </h2>
+            <div className="divider-gold mt-8" />
+          </div>
+
           <div className="grid sm:grid-cols-4 gap-8 text-center mb-20">
             {[
               { value: MARKET_STATS.seasonalHomes, label: "Seasonal Homes" },
@@ -428,48 +403,30 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="text-center mb-12">
-            <span className="section-label text-gold-400">Testimonials</span>
-            <h2 className="mt-4 text-3xl sm:text-4xl font-serif font-bold text-white">
-              What Homeowners Say
-            </h2>
-            <div className="divider-gold mt-8" />
-          </div>
-
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                quote: "We used to fly down every time there was a storm warning. Now our caretaker sends a photo report the next morning. Total peace of mind.",
-                author: "Second-home owner",
-                location: "Edgartown",
+                title: "Storm Protection",
+                text: "Pre-storm preparation and post-storm walkthroughs ensure damage is caught and addressed immediately — not months later when you return.",
               },
               {
-                quote: "From plowing the driveway to stocking the fridge before we arrive — it's like having a personal concierge on the Vineyard.",
-                author: "Seasonal resident",
-                location: "Chilmark",
+                title: "Insurance Compliance",
+                text: "Most insurers require documented monitoring of seasonal homes. Professional caretaking with photo reports satisfies these requirements.",
               },
               {
-                quote: "Our insurer required documented property checks. MVCaretaking connected us with a bonded caretaker in 48 hours. Couldn't be happier.",
-                author: "Vacation-home owner",
-                location: "West Tisbury",
+                title: "Investment Stewardship",
+                text: "From plowing the driveway to coordinating contractors, a caretaker keeps your multi-million dollar investment in peak condition year-round.",
               },
-            ].map((testimonial) => (
-              <blockquote
-                key={testimonial.location}
+            ].map((item) => (
+              <div
+                key={item.title}
                 className="relative bg-white/[0.03] backdrop-blur-sm rounded-2xl p-8 border border-white/[0.06]"
               >
-                <span className="text-gold-500/30 text-5xl font-serif leading-none block mb-4">&ldquo;</span>
-                <p className="text-white/80 leading-relaxed font-light italic">
-                  {testimonial.quote}
+                <h3 className="text-lg font-serif font-semibold text-white mb-3">{item.title}</h3>
+                <p className="text-white/70 leading-relaxed font-light">
+                  {item.text}
                 </p>
-                <footer className="mt-6 flex items-center gap-3">
-                  <div className="w-px h-8 bg-gold-500/30" />
-                  <div>
-                    <p className="text-sm text-white/60">{testimonial.author}</p>
-                    <p className="text-xs text-gold-500/70">{testimonial.location}</p>
-                  </div>
-                </footer>
-              </blockquote>
+              </div>
             ))}
           </div>
         </div>

@@ -23,14 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "mv-str-regulations-2025",
   ];
 
-  const caretakerSlugs = [
-    "vineyard-home-watch",
-    "island-estate-care",
-    "mv-coastal-caretaking",
-    "oak-bluffs-property-services",
-    "green-island-caretakers",
-    "mv-guardian-services",
-  ];
 
   const staticPages = [
     { url: BASE_URL, priority: 1.0, changeFrequency: "weekly" as const },
@@ -61,13 +53,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
   }));
 
-  const caretakerPages = caretakerSlugs.map((slug) => ({
-    url: `${BASE_URL}/caretakers/${slug}`,
-    priority: 0.6,
-    changeFrequency: "weekly" as const,
-    lastModified: new Date(),
-  }));
-
   return [
     ...staticPages.map((page) => ({
       ...page,
@@ -75,6 +60,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...townPages,
     ...blogPages,
-    ...caretakerPages,
   ];
 }
