@@ -129,7 +129,7 @@ export default function Footer() {
 
         {/* Disclaimer */}
         <div className="mt-16 pt-8 border-t border-navy-800/50">
-          <p className="text-xs text-navy-700 leading-relaxed max-w-4xl">
+          <p className="text-xs text-navy-500 leading-relaxed max-w-4xl">
             MVCaretaking.com is a free matching and directory service. We connect
             Martha&apos;s Vineyard homeowners with independent caretaking
             professionals. We do not provide caretaking services directly and do

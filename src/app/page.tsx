@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { MOCK_CARETAKERS, MARKET_STATS } from "@/lib/data";
+import AnimateOnScroll from "@/components/AnimateOnScroll";
 import {
   Shield,
   Eye,
@@ -192,6 +193,7 @@ export default function HomePage() {
       {/* ============ PROBLEM / SOLUTION ============ */}
       <section className="section-padding bg-white">
         <div className="container-narrow">
+          <AnimateOnScroll>
           <div className="text-center max-w-3xl mx-auto">
             <span className="section-label">The Challenge</span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-navy-900 text-balance">
@@ -200,6 +202,7 @@ export default function HomePage() {
             </h2>
             <div className="divider-gold mt-8" />
           </div>
+          </AnimateOnScroll>
 
           <div className="mt-16 grid md:grid-cols-3 gap-8">
             {[
@@ -252,6 +255,7 @@ export default function HomePage() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent" />
 
         <div className="relative z-10 container-narrow">
+          <AnimateOnScroll>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="section-label text-gold-400">Our Services</span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white text-balance">
@@ -262,6 +266,7 @@ export default function HomePage() {
             </p>
             <div className="divider-gold mt-8" />
           </div>
+          </AnimateOnScroll>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((svc) => (
@@ -293,6 +298,7 @@ export default function HomePage() {
       {/* ============ HOW IT WORKS ============ */}
       <section className="section-padding bg-sand-50">
         <div className="container-narrow">
+          <AnimateOnScroll>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="section-label">The Process</span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-navy-900 text-balance">
@@ -300,6 +306,7 @@ export default function HomePage() {
             </h2>
             <div className="divider-gold mt-8" />
           </div>
+          </AnimateOnScroll>
 
           <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
             {steps.map((step, i) => (

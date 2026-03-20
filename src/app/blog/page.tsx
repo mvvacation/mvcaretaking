@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BookOpen } from "lucide-react";
 import { MOCK_BLOG_POSTS } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -36,8 +37,9 @@ export default function BlogIndexPage() {
                 className="bg-white rounded-2xl border border-navy-100/50 overflow-hidden hover:shadow-luxury transition-shadow duration-300"
               >
                 {/* Image placeholder */}
-                <div className="aspect-[16/9] bg-navy-100 flex items-center justify-center text-navy-400 text-sm">
-                  Featured Image
+                <div className="aspect-[16/9] bg-gradient-to-br from-navy-50 via-navy-100 to-gold-50 flex flex-col items-center justify-center text-navy-300">
+                  <BookOpen className="w-8 h-8 mb-1" />
+                  <span className="text-xs">Featured Image</span>
                 </div>
 
                 <div className="p-6">

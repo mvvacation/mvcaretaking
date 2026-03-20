@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Home } from "lucide-react";
 import { TOWN_DATA, MOCK_CARETAKERS, PRICING_DATA, MARKET_STATS } from "@/lib/data";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 type Props = {
   params: { slug: string };
@@ -33,6 +34,9 @@ export function generateMetadata({ params }: Props): Metadata {
       `${town.name} caretaking services`,
       `Martha's Vineyard ${town.name} property care`,
     ],
+    alternates: {
+      canonical: `https://mvcaretaking.com/towns/${params.slug}`,
+    },
   };
 }
 
@@ -51,9 +55,9 @@ export default function TownPage({ params }: Props) {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-4xl">
-            <p className="section-label">
-              Martha&apos;s Vineyard Caretaking
-            </p>
+            <Breadcrumbs dark items={[
+              { label: town.name },
+            ]} />
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6">
               Caretaking Services in{" "}
               <span className="text-gold-400">{town.name}</span>

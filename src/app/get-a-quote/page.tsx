@@ -2,6 +2,7 @@
 
 import { Suspense, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 import { MV_TOWNS, SERVICE_CATEGORIES, PROPERTY_TYPES } from "@/lib/data";
 
 function QuoteForm() {
@@ -22,9 +23,27 @@ function QuoteForm() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   function update(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
+  }
+
+  function blur(field: string) {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+  }
+
+  function fieldError(field: string): string | null {
+    if (!touched[field]) return null;
+    const v = form[field as keyof typeof form];
+    if (field === "firstName" && !v) return "First name is required";
+    if (field === "lastName" && !v) return "Last name is required";
+    if (field === "email") {
+      if (!v) return "Email is required";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v as string)) return "Please enter a valid email";
+    }
+    if (field === "town" && !v) return "Please select a town";
+    return null;
   }
 
   function toggleService(svc: string) {
@@ -105,8 +124,10 @@ function QuoteForm() {
                       required
                       value={form.firstName}
                       onChange={(e) => update("firstName", e.target.value)}
-                      className="w-full rounded-lg border border-navy-200 px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+                      onBlur={() => blur("firstName")}
+                      className={`w-full rounded-lg border px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent ${fieldError("firstName") ? "border-red-300" : "border-navy-200"}`}
                     />
+                    {fieldError("firstName") && <p className="mt-1 text-xs text-red-500">{fieldError("firstName")}</p>}
                   </div>
                   <div>
                     <label
@@ -121,8 +142,10 @@ function QuoteForm() {
                       required
                       value={form.lastName}
                       onChange={(e) => update("lastName", e.target.value)}
-                      className="w-full rounded-lg border border-navy-200 px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+                      onBlur={() => blur("lastName")}
+                      className={`w-full rounded-lg border px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent ${fieldError("lastName") ? "border-red-300" : "border-navy-200"}`}
                     />
+                    {fieldError("lastName") && <p className="mt-1 text-xs text-red-500">{fieldError("lastName")}</p>}
                   </div>
                   <div>
                     <label
@@ -137,8 +160,10 @@ function QuoteForm() {
                       required
                       value={form.email}
                       onChange={(e) => update("email", e.target.value)}
-                      className="w-full rounded-lg border border-navy-200 px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+                      onBlur={() => blur("email")}
+                      className={`w-full rounded-lg border px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent ${fieldError("email") ? "border-red-300" : "border-navy-200"}`}
                     />
+                    {fieldError("email") && <p className="mt-1 text-xs text-red-500">{fieldError("email")}</p>}
                   </div>
                   <div>
                     <label
@@ -176,7 +201,8 @@ function QuoteForm() {
                       required
                       value={form.town}
                       onChange={(e) => update("town", e.target.value)}
-                      className="w-full rounded-lg border border-navy-200 px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+                      onBlur={() => blur("town")}
+                      className={`w-full rounded-lg border px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent ${fieldError("town") ? "border-red-300" : "border-navy-200"}`}
                     >
                       <option value="">Select a town</option>
                       {MV_TOWNS.map((town) => (
@@ -308,9 +334,16 @@ function QuoteForm() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                {submitting ? "Submitting..." : "Submit & Get Matched Free"}
+                {submitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  "Submit & Get Matched Free"
+                )}
               </button>
 
               <p className="text-xs text-navy-400 text-center">

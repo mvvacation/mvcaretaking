@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { MOCK_BLOG_POSTS } from "@/lib/data";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 type Props = {
   params: { slug: string };
@@ -750,6 +751,9 @@ export function generateMetadata({ params }: Props): Metadata {
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: {
+      canonical: `https://mvcaretaking.com/blog/${params.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -855,12 +859,10 @@ export default function BlogPostPage({ params }: Props) {
       <section className="bg-navy-950 text-white section-padding pb-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
         <div className="container-narrow max-w-3xl mx-auto relative">
-          <Link
-            href="/blog"
-            className="text-sm text-navy-400 hover:text-white transition-colors duration-300"
-          >
-            ← Back to Blog
-          </Link>
+          <Breadcrumbs dark items={[
+            { label: "Blog", href: "/blog" },
+            { label: post.title },
+          ]} />
           <h1 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold leading-tight">
             {post.title}
           </h1>

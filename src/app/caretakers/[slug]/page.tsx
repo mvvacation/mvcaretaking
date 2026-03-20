@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Check, Star } from "lucide-react";
+import { Check, Camera, MessageSquare } from "lucide-react";
 import { MOCK_CARETAKERS } from "@/lib/data";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 type Props = {
   params: { slug: string };
@@ -18,6 +19,9 @@ export function generateMetadata({ params }: Props): Metadata {
   return {
     title: `${ct.name} — MV Caretaker`,
     description: ct.tagline || ct.description?.slice(0, 155),
+    alternates: {
+      canonical: `https://mvcaretaking.com/caretakers/${params.slug}`,
+    },
   };
 }
 
@@ -32,12 +36,10 @@ export default function CaretakerProfilePage({ params }: Props) {
       <section className="bg-navy-950 text-white section-padding pb-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
         <div className="container-narrow relative">
-          <Link
-            href="/caretakers"
-            className="text-sm text-navy-400 hover:text-white transition-colors duration-300"
-          >
-            ← Back to Directory
-          </Link>
+          <Breadcrumbs dark items={[
+            { label: "Caretakers", href: "/caretakers" },
+            { label: ct.name },
+          ]} />
           <div className="mt-6 flex flex-col md:flex-row md:items-start md:justify-between gap-6">
             <div>
               <h1 className="text-3xl sm:text-4xl font-serif font-bold">{ct.name}</h1>
@@ -131,46 +133,26 @@ export default function CaretakerProfilePage({ params }: Props) {
                   {[1, 2, 3, 4, 5, 6].map((n) => (
                     <div
                       key={n}
-                      className="aspect-[4/3] bg-navy-100 rounded-2xl flex items-center justify-center text-navy-400 text-sm"
+                      className="aspect-[4/3] bg-gradient-to-br from-navy-50 to-navy-100 rounded-2xl flex flex-col items-center justify-center text-navy-300 border border-navy-100/50"
                     >
-                      Photo {n}
+                      <Camera className="w-6 h-6 mb-1" />
+                      <span className="text-xs">Coming Soon</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Reviews placeholder */}
+              {/* Reviews */}
               <div>
                 <h2 className="text-2xl font-serif font-bold text-navy-900 mb-4">
                   Reviews
                 </h2>
-                <div className="space-y-4">
-                  <div className="bg-sand-50 rounded-2xl p-6 border border-navy-100/50">
-                    <div className="flex items-center gap-1 text-gold-500 text-sm">
-                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-gold-500" />)}
-                    </div>
-                    <p className="mt-2 text-navy-700 italic">
-                      &ldquo;[Placeholder review — excellent service,
-                      responsive, and thorough. Highly recommend for any MV
-                      homeowner.]&rdquo;
-                    </p>
-                    <p className="mt-2 text-sm text-navy-500">
-                      — [Reviewer Name]
-                    </p>
-                  </div>
-                  <div className="bg-sand-50 rounded-2xl p-6 border border-navy-100/50">
-                    <div className="flex items-center gap-1 text-gold-500 text-sm">
-                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-gold-500" />)}
-                    </div>
-                    <p className="mt-2 text-navy-700 italic">
-                      &ldquo;[Placeholder review — they saved us during last
-                      winter&apos;s nor&apos;easter. Quick response and detailed
-                      documentation.]&rdquo;
-                    </p>
-                    <p className="mt-2 text-sm text-navy-500">
-                      — [Reviewer Name]
-                    </p>
-                  </div>
+                <div className="bg-sand-50 rounded-2xl p-8 border border-navy-100/50 text-center">
+                  <MessageSquare className="w-10 h-10 text-navy-300 mx-auto mb-3" />
+                  <p className="text-navy-600 font-medium">Reviews Coming Soon</p>
+                  <p className="text-sm text-navy-400 mt-1">
+                    Verified client reviews will appear here once this provider is fully onboarded.
+                  </p>
                 </div>
               </div>
             </div>

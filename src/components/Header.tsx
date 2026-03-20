@@ -85,7 +85,8 @@ export default function Header() {
           <button
             className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled ? "text-navy-700 hover:bg-navy-50" : "text-white hover:bg-white/10"}`}
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle navigation menu"
+            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileOpen}
           >
             <svg
               className="w-6 h-6"
@@ -114,7 +115,7 @@ export default function Header() {
 
         {/* Mobile Nav */}
         {mobileOpen && (
-          <div className="lg:hidden pb-6 animate-fade-in">
+          <div className="lg:hidden pb-6 animate-fade-in" role="navigation" aria-label="Mobile navigation">
             <div className="bg-white/95 backdrop-blur-md rounded-2xl border border-navy-100/50 shadow-luxury-lg p-4 mt-2">
               <div className="flex flex-col gap-1">
                 {navigation.map((item) => (
