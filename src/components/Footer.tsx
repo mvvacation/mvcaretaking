@@ -3,6 +3,7 @@ import { MV_TOWNS, TOWN_DATA } from "@/lib/data";
 
 const footerNav = {
   company: [
+    { name: "About Us", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "How It Works", href: "/how-it-works" },
     { name: "Caretakers", href: "/caretakers" },

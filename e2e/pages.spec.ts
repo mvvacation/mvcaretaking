@@ -14,6 +14,7 @@ const pages = [
   { path: "/privacy", titlePattern: /Privacy/i },
   { path: "/terms", titlePattern: /Terms/i },
   { path: "/thank-you", titlePattern: /Thank/i },
+  { path: "/about", titlePattern: /About/i },
 ];
 
 for (const { path, titlePattern } of pages) {

@@ -260,6 +260,7 @@ export const BLOG_POSTS = [
       "If you own a second home on MV and aren't on-island year-round, the answer is almost certainly yes. Here's why — and what happens when you don't have one.",
     author: "MVCaretaking Team",
     publishedAt: "2026-03-15",
+    readingTime: 6,
     imageUrl: null,
   },
   {
@@ -269,6 +270,7 @@ export const BLOG_POSTS = [
       "The first transparent pricing guide for MV caretaking: from basic inspections at $60/visit to full estate management at $50,000/year, with real market data.",
     author: "MVCaretaking Team",
     publishedAt: "2026-02-20",
+    readingTime: 8,
     imageUrl: null,
   },
   {
@@ -278,6 +280,7 @@ export const BLOG_POSTS = [
       "Bonded and insured? NHWA accredited? Year-round resident? Here are the 7 questions that separate great MV caretakers from risky ones.",
     author: "MVCaretaking Team",
     publishedAt: "2026-02-05",
+    readingTime: 7,
     imageUrl: null,
   },
   {
@@ -287,6 +290,7 @@ export const BLOG_POSTS = [
       "Your insurance company may deny claims on unattended homes without proof of regular monitoring. Here's what every MV second-home owner needs to know.",
     author: "MVCaretaking Team",
     publishedAt: "2026-01-18",
+    readingTime: 7,
     imageUrl: null,
   },
   {
@@ -296,6 +300,7 @@ export const BLOG_POSTS = [
       "The 2024 season saw 3 major nor'easters hit the Vineyard. Homes without caretakers averaged $35,000 more in storm damage. Here's your complete prep checklist.",
     author: "MVCaretaking Team",
     publishedAt: "2025-11-15",
+    readingTime: 8,
     imageUrl: null,
   },
   {
@@ -305,6 +310,7 @@ export const BLOG_POSTS = [
       "A single missed step during winterization can mean $100,000+ in damage. Our comprehensive checklist covers every system in your Vineyard home.",
     author: "MVCaretaking Team",
     publishedAt: "2025-09-20",
+    readingTime: 9,
     imageUrl: null,
   },
   {
@@ -314,6 +320,7 @@ export const BLOG_POSTS = [
       "From the $100 trillion generational wealth transfer to the 4,000+ registered STRs, here's everything you need to know about owning and managing a Vineyard property from afar.",
     author: "MVCaretaking Team",
     publishedAt: "2025-08-10",
+    readingTime: 10,
     imageUrl: null,
   },
   {
@@ -323,6 +330,7 @@ export const BLOG_POSTS = [
       "Every MV town is now regulating STRs differently. West Tisbury's 30-day occupancy rule, Tisbury's 75-night cap, Chilmark's proposed 95-day limit — here's what owners need to know.",
     author: "MVCaretaking Team",
     publishedAt: "2025-07-15",
+    readingTime: 8,
     imageUrl: null,
   },
 ];

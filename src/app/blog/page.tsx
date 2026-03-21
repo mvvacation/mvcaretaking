@@ -10,9 +10,31 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://mvcaretaking.com/blog" },
 };
 
+const collectionJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "MV Caretaking Blog",
+  description:
+    "Expert guides on Martha's Vineyard property care: storm prep, seasonal checklists, cost breakdowns, and caretaker hiring tips.",
+  url: "https://mvcaretaking.com/blog",
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: BLOG_POSTS.map((post, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      url: `https://mvcaretaking.com/blog/${post.slug}`,
+      name: post.title,
+    })),
+  },
+};
+
 export default function BlogIndexPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+      />
       {/* Header */}
       <section className="bg-navy-950 text-white section-padding relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
@@ -50,7 +72,7 @@ export default function BlogIndexPage() {
                       month: "long",
                       day: "numeric",
                     })}{" "}
-                    · {post.author}
+                    · {post.author} · {post.readingTime} min read
                   </p>
                   <h2 className="mt-2 text-xl font-serif font-bold text-navy-900">
                     <Link

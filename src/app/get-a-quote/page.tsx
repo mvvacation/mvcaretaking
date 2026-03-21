@@ -42,6 +42,7 @@ function QuoteForm() {
       if (!v) return "Email is required";
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v as string)) return "Please enter a valid email";
     }
+    if (field === "phone" && v && !/^[\d\-\s\+\(\)]+$/.test(v as string)) return "Please enter a valid phone number";
     if (field === "town" && !v) return "Please select a town";
     return null;
   }
@@ -184,8 +185,12 @@ function QuoteForm() {
                       type="tel"
                       value={form.phone}
                       onChange={(e) => update("phone", e.target.value)}
-                      className="w-full rounded-lg border border-navy-200 px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+                      onBlur={() => blur("phone")}
+                      aria-invalid={!!fieldError("phone")}
+                      aria-describedby={fieldError("phone") ? "phone-error" : undefined}
+                      className={`w-full rounded-lg border px-4 py-2.5 text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent ${fieldError("phone") ? "border-red-300" : "border-navy-200"}`}
                     />
+                    {fieldError("phone") && <p id="phone-error" role="alert" className="mt-1 text-xs text-red-500">{fieldError("phone")}</p>}
                   </div>
                 </div>
               </fieldset>
@@ -346,6 +351,7 @@ function QuoteForm() {
               <button
                 type="submit"
                 disabled={submitting}
+                aria-busy={submitting}
                 className="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {submitting ? (

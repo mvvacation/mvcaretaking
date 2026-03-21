@@ -10,6 +10,7 @@ const pagesToTest = [
   { name: "Blog", path: "/blog" },
   { name: "Caretakers", path: "/caretakers" },
   { name: "Get a Quote", path: "/get-a-quote" },
+  { name: "About", path: "/about" },
 ];
 
 test.describe("Accessibility", () => {

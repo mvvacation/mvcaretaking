@@ -770,6 +770,10 @@ export default function BlogPostPage({ params }: Props) {
 
   const content = blogContent[params.slug] || "";
 
+  // Estimate reading time from content
+  const wordCount = content.split(/\s+/).filter(Boolean).length;
+  const readingTime = Math.max(1, Math.ceil(wordCount / 250));
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -777,10 +781,20 @@ export default function BlogPostPage({ params }: Props) {
     description: post.excerpt,
     author: { "@type": "Person", name: post.author },
     datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    wordCount,
     publisher: {
       "@type": "Organization",
       name: "MVCaretaking",
       url: "https://mvcaretaking.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://mvcaretaking.com/opengraph-image",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://mvcaretaking.com/blog/${params.slug}`,
     },
   };
 
@@ -909,7 +923,7 @@ export default function BlogPostPage({ params }: Props) {
               month: "long",
               day: "numeric",
             })}{" "}
-            · {post.author}
+            · {post.author} · {readingTime} min read
           </p>
         </div>
       </section>

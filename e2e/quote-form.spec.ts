@@ -88,6 +88,13 @@ test.describe("Get a Quote form", () => {
     await expect(page.getByText("First name is required")).not.toBeVisible();
   });
 
+  test("shows error when phone has invalid characters", async ({ page }) => {
+    const phone = page.getByLabel(/Phone/i);
+    await phone.fill("abc");
+    await phone.blur();
+    await expect(page.getByText("Please enter a valid phone number")).toBeVisible();
+  });
+
   test("service checkboxes toggle correctly", async ({ page }) => {
     const checkbox = page.getByRole("checkbox").first();
     await expect(checkbox).not.toBeChecked();

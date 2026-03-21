@@ -92,6 +92,19 @@ test.describe("SEO & Meta", () => {
     expect(breadcrumb).toBeTruthy();
   });
 
+  test("blog index has CollectionPage JSON-LD", async ({ page }) => {
+    await page.goto("/blog");
+    const jsonLd = page.locator('script[type="application/ld+json"]');
+    const count = await jsonLd.count();
+    expect(count).toBeGreaterThanOrEqual(2);
+    const schemas: Record<string, unknown>[] = [];
+    for (let i = 0; i < count; i++) {
+      schemas.push(JSON.parse((await jsonLd.nth(i).textContent())!));
+    }
+    const collection = schemas.find((s) => s["@type"] === "CollectionPage");
+    expect(collection).toBeTruthy();
+  });
+
   test("sitemap is accessible", async ({ page }) => {
     const response = await page.goto("/sitemap.xml");
     expect(response?.status()).toBe(200);
