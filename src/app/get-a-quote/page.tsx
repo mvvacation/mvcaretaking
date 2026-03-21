@@ -3,6 +3,7 @@
 import { Suspense, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { MV_TOWNS, SERVICE_CATEGORIES, PROPERTY_TYPES } from "@/lib/data";
 
 function QuoteForm() {
@@ -12,7 +13,7 @@ function QuoteForm() {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    email: searchParams.get("email") || "",
+    email: searchParams.get("email") || (typeof window !== "undefined" ? sessionStorage.getItem("mv_lead_email") || "" : ""),
     phone: "",
     town: "",
     propertyType: "",
@@ -90,6 +91,7 @@ function QuoteForm() {
       <section className="bg-navy-950 text-white section-padding pb-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
         <div className="container-narrow text-center relative">
+          <Breadcrumbs dark items={[{ label: "Get a Quote" }]} />
           <p className="section-label">Free Matching</p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold">
             Get Matched With a Trusted MV Caretaker

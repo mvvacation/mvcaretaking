@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { Shield, Users, MapPin, Award } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ export default function AboutPage() {
       <section className="bg-navy-950 text-white section-padding pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
         <div className="container-narrow text-center relative">
+          <Breadcrumbs dark items={[{ label: "About" }]} />
           <p className="section-label">About Us</p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold">
             Protecting Martha&apos;s Vineyard Homes, One Match at a Time

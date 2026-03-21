@@ -11,8 +11,7 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log error for monitoring — replace with Sentry/external service in production
-    if (error) {
+    if (error && process.env.NODE_ENV !== "production") {
       console.error("[MVCaretaking Error]", {
         message: error.message,
         digest: error.digest,

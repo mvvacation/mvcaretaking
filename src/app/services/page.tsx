@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { MARKET_STATS } from "@/lib/data";
 import { Search, CloudLightning, Home, BedDouble, Wrench, Gift, Lock, Leaf } from "lucide-react";
 
@@ -239,6 +240,7 @@ export default function ServicesPage() {
       <section className="bg-navy-950 text-white section-padding relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
         <div className="container-narrow text-center relative">
+          <Breadcrumbs dark items={[{ label: "Services" }]} />
           <p className="section-label">Our Services</p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold">
             What Caretakers Do on Martha&apos;s Vineyard

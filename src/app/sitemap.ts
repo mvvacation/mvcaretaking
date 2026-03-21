@@ -40,24 +40,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/terms`, priority: 0.3, changeFrequency: "yearly" as const },
   ];
 
+  const siteLastModified = new Date("2025-06-01");
+
   const townPages = townSlugs.map((slug) => ({
     url: `${BASE_URL}/towns/${slug}`,
     priority: 0.8,
     changeFrequency: "monthly" as const,
-    lastModified: new Date(),
+    lastModified: siteLastModified,
   }));
 
   const blogPages = blogSlugs.map((slug) => ({
     url: `${BASE_URL}/blog/${slug}`,
     priority: 0.7,
     changeFrequency: "monthly" as const,
-    lastModified: new Date(),
+    lastModified: siteLastModified,
   }));
 
   return [
     ...staticPages.map((page) => ({
       ...page,
-      lastModified: new Date(),
+      lastModified: siteLastModified,
     })),
     ...townPages,
     ...blogPages,

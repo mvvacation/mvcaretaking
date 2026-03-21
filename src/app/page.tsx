@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { MARKET_STATS } from "@/lib/data";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
+import EmailCaptureForm from "@/components/EmailCaptureForm";
 import {
   Shield,
   Eye,
@@ -110,8 +111,8 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy-950/60 via-navy-950/80 to-navy-950" />
           {/* Subtle gradient orb */}
-          <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-gold-600/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-gold-500/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-gold-600/10 rounded-full blur-3xl hidden md:block" />
+          <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-gold-500/5 rounded-full blur-3xl hidden md:block" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
@@ -515,22 +516,7 @@ export default function HomePage() {
           </p>
 
           <div className="mt-10 max-w-md mx-auto">
-            <form
-              action="/get-a-quote"
-              method="GET"
-              className="flex gap-3"
-            >
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                required
-                className="flex-1 px-5 py-3.5 rounded-xl text-navy-900 bg-white placeholder:text-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-400 border border-white/20 text-sm"
-              />
-              <button type="submit" className="btn-primary whitespace-nowrap px-6">
-                Get Matched
-              </button>
-            </form>
+            <EmailCaptureForm />
           </div>
 
           <p className="mt-4 text-xs text-navy-600">

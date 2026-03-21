@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { MARKET_STATS, PRICING_DATA } from "@/lib/data";
 import { Search, CloudLightning, Snowflake, Wrench, BedDouble, Gift, Lock, Leaf, CheckCircle, AlertTriangle, XCircle } from "lucide-react";
 
@@ -105,6 +106,7 @@ export default function WhatIsACaretakerPage() {
       <section className="bg-navy-950 text-white section-padding relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
         <div className="container-narrow text-center relative">
+          <Breadcrumbs dark items={[{ label: "What Is a Caretaker?" }]} />
           <p className="section-label">
             The Complete Guide
           </p>

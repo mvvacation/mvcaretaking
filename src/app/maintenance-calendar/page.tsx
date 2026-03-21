@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Seasonal Home Maintenance Calendar for Martha's Vineyard",
@@ -221,6 +222,7 @@ export default function MaintenanceCalendarPage() {
       <section className="bg-navy-950 text-white section-padding relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
         <div className="container-narrow text-center relative">
+          <Breadcrumbs dark items={[{ label: "Maintenance Calendar" }]} />
           <p className="section-label">
             Seasonal Property Care Guide
           </p>

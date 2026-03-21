@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { Check } from "lucide-react";
 import { PRICING_DATA, MARKET_STATS } from "@/lib/data";
 
@@ -37,6 +38,7 @@ export default function CostGuidePage() {
       <section className="bg-navy-950 text-white pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+          <Breadcrumbs dark items={[{ label: "Cost Guide" }]} />
           <p className="section-label">2025 Pricing Guide</p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6">
             What Does Caretaking Cost on Martha&apos;s Vineyard?

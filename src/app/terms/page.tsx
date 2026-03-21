@@ -16,7 +16,7 @@ export default function TermsPage() {
         <div className="container-narrow text-center relative">
           <p className="section-label">Legal</p>
           <h1 className="text-4xl sm:text-5xl font-serif font-bold">Terms of Service</h1>
-          <p className="mt-4 text-navy-300">Last updated: March 2026</p>
+          <p className="mt-4 text-navy-300">Last updated: June 2025</p>
         </div>
       </section>
 

@@ -101,9 +101,7 @@
   .gradient-text {
     @apply bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 bg-clip-text text-transparent;
   }
-  .gradient-text-gold {
-    @apply bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 bg-clip-text text-transparent;
-  }
+
 }
 
 @layer utilities {
