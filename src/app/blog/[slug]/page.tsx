@@ -195,18 +195,20 @@ export default function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
           <p className="mt-4 text-navy-400">
-            {new Date(post.publishedAt).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}{" "}
+            <time dateTime={post.publishedAt}>
+              {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>{" "}
             · {post.author} · {readingTime} min read
           </p>
         </div>
       </section>
 
       {/* Content */}
-      <section className="section-padding">
+      <article className="section-padding" aria-label={post.title}>
         <div className="container-narrow max-w-3xl mx-auto">
           {content ? (
             <div className="prose-like">{renderContent(content)}</div>
@@ -275,7 +277,7 @@ export default function BlogPostPage({ params }: Props) {
             do not provide caretaking services directly.
           </p>
         </div>
-      </section>
+      </article>
     </>
   );
 }

@@ -6,12 +6,13 @@ test.describe("Get a Quote form", () => {
   });
 
   test("form has all required fields", async ({ page }) => {
-    await expect(page.getByLabel(/First Name/i)).toBeVisible();
-    await expect(page.getByLabel(/Last Name/i)).toBeVisible();
-    await expect(page.getByLabel(/Email/i)).toBeVisible();
-    await expect(page.getByLabel(/Phone/i)).toBeVisible();
-    await expect(page.getByLabel(/Town/i)).toBeVisible();
-    await expect(page.getByLabel(/Property Type/i)).toBeVisible();
+    const form = page.locator("form");
+    await expect(form.getByLabel(/First Name/i)).toBeVisible();
+    await expect(form.getByLabel(/Last Name/i)).toBeVisible();
+    await expect(form.getByLabel(/Email/i)).toBeVisible();
+    await expect(form.getByLabel(/Phone/i)).toBeVisible();
+    await expect(form.getByLabel(/Town/i)).toBeVisible();
+    await expect(form.getByLabel(/Property Type/i)).toBeVisible();
   });
 
   test("shows validation errors on empty submit", async ({ page }) => {
@@ -39,7 +40,8 @@ test.describe("Get a Quote form", () => {
   });
 
   test("town dropdown has all 6 MV towns", async ({ page }) => {
-    const townSelect = page.getByLabel(/Town/i);
+    const form = page.locator("form");
+    const townSelect = form.getByLabel(/Town/i);
     await expect(townSelect).toBeVisible();
     const options = townSelect.locator("option");
     // 6 towns + 1 placeholder = at minimum 7
@@ -72,7 +74,8 @@ test.describe("Get a Quote form", () => {
   });
 
   test("shows error when town is empty after blur", async ({ page }) => {
-    const town = page.getByLabel(/Town/i);
+    const form = page.locator("form");
+    const town = form.getByLabel(/Town/i);
     await town.focus();
     await town.blur();
     await expect(page.getByText("Please select a town")).toBeVisible();

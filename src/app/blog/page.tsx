@@ -75,11 +75,13 @@ export default function BlogIndexPage() {
 
                 <div className="p-6">
                   <p className="text-xs text-navy-400">
-                    {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}{" "}
+                    <time dateTime={post.publishedAt}>
+                      {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </time>{" "}
                     · {post.author} · {post.readingTime} min read
                   </p>
                   <h2 className="mt-2 text-xl font-serif font-bold text-navy-900">

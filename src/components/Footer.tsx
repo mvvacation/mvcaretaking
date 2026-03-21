@@ -31,7 +31,7 @@ const footerNav = {
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-950 text-navy-200 relative">
+    <footer className="bg-navy-950 text-navy-200 relative" aria-label="Site footer">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 lg:gap-14">
@@ -50,7 +50,7 @@ export default function Footer() {
           </div>
 
           {/* Company */}
-          <div>
+          <nav aria-label="Company">
             <h2 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
               Company
             </h2>
@@ -66,10 +66,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Resources */}
-          <div>
+          <nav aria-label="Resources">
             <h2 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
               Resources
             </h2>
@@ -85,10 +85,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Towns */}
-          <div>
+          <nav aria-label="Martha's Vineyard towns">
             <h2 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
               MV Towns
             </h2>
@@ -104,10 +104,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Network */}
-          <div>
+          <nav aria-label="MV Network">
             <h2 className="text-xs font-semibold text-gold-500 uppercase tracking-luxe mb-5">
               MV Network
             </h2>
@@ -125,7 +125,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
 
         {/* Disclaimer */}
