@@ -36,11 +36,11 @@ const faqs = [
     items: [
       {
         q: "What does a caretaker actually do?",
-        a: "A caretaker performs regular property inspections, responds to storms and emergencies, handles seasonal opening and closing of your home, coordinates with contractors, manages rental turnovers, and can provide concierge services like grocery stocking and arrival prep. Think of them as your eyes, ears, and hands on Martha's Vineyard.",
+        a: "A caretaker performs regular property inspections, responds to storms and emergencies, handles seasonal opening and closing of your home, coordinates with contractors, manages rental turnovers, and can provide concierge services like grocery stocking and arrival prep. Think of them as your eyes, ears, and hands on Martha's Vineyard. Learn more in our [complete guide to caretaking](/what-is-a-caretaker).",
       },
       {
         q: "How often should my property be inspected?",
-        a: "Most caretakers recommend weekly inspections during the off-season (October-May) when your home is most vulnerable to weather damage. During summer, inspection frequency depends on whether you're renting the property and how often you visit.",
+        a: "Most caretakers recommend weekly inspections during the off-season (October-May) when your home is most vulnerable to weather damage. During summer, inspection frequency depends on whether you're renting the property and how often you visit. See our [maintenance calendar](/maintenance-calendar) for a month-by-month breakdown.",
       },
       {
         q: "Do I need a caretaker if I have an alarm system?",
@@ -57,7 +57,7 @@ const faqs = [
     items: [
       {
         q: "How much does caretaking cost on Martha's Vineyard?",
-        a: "Costs range widely. Basic bi-monthly inspections start at $60–$100/visit. Standard monthly retainers are $300–$600/month (the most common arrangement). Premium estate management runs $1,000–$4,000+/month. Annually, most homeowners pay $3,600–$12,000 for standard service, or $15,000–$50,000 for full luxury estate management. See our detailed Cost Guide for a complete breakdown.",
+        a: "Costs range widely. Basic bi-monthly inspections start at $60–$100/visit. Standard monthly retainers are $300–$600/month (the most common arrangement). Premium estate management runs $1,000–$4,000+/month. Annually, most homeowners pay $3,600–$12,000 for standard service, or $15,000–$50,000 for full luxury estate management. See our [detailed Cost Guide](/cost-guide) for a complete breakdown.",
       },
       {
         q: "Why is caretaking more expensive on MV than the mainland?",
@@ -82,7 +82,7 @@ const faqs = [
       },
       {
         q: "What should I look for when choosing a caretaker?",
-        a: "Key factors include: bonding and insurance, years of island experience, quality of inspection reports, emergency response protocols, contractor relationships, client references, and communication style. Our blog has a detailed guide on this topic.",
+        a: "Key factors include: bonding and insurance, years of island experience, quality of inspection reports, emergency response protocols, contractor relationships, client references, and communication style. Our [guide to choosing the right caretaker](/blog/choosing-the-right-caretaker-mv) covers this topic in detail.",
       },
       {
         q: "Should my caretaker be bonded and insured?",
@@ -187,7 +187,11 @@ export default function FAQPage() {
                       </summary>
                       <div className="px-6 pb-6">
                         <p className="text-navy-600 leading-relaxed">
-                          {faq.a}
+                          {faq.a.split(/(\[[^\]]+\]\([^)]+\))/g).map((part, j) => {
+                            const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+                            if (match) return <Link key={j} href={match[2]} className="text-gold-600 underline underline-offset-2 hover:text-gold-700">{match[1]}</Link>;
+                            return part;
+                          })}
                         </p>
                       </div>
                     </details>

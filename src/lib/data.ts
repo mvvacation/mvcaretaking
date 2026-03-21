@@ -40,7 +40,7 @@ export const MARKET_STATS = {
   averageSalePrice2025: "$2,626,357",
   totalSalesVolume2025: "$780M",
   transactions2025: 297,
-  averageCaretakingCost: "$15,000–$50,000",
+  averageCaretakingCost: "$3,600–$12,000",
   registeredSTRs: "4,000+",
   strTaxRevenue: "$9.4M",
   islandContractorPremium: "20–35%",

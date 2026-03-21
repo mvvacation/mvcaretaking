@@ -78,10 +78,20 @@ export default function AboutPage() {
                 that&apos;s not good enough.
               </p>
               <p>
-                We created MVCaretaking to solve this problem: a transparent,
-                data-driven platform that matches homeowners with verified
-                professionals based on town, property type, and specific needs.
-                No guesswork, no risk.
+                We created MVCaretaking to solve this problem: a{" "}
+                <Link href="/how-it-works" className="text-gold-600 underline underline-offset-2 hover:text-gold-700">
+                  transparent, data-driven platform
+                </Link>{" "}
+                that matches homeowners with verified professionals based on
+                town, property type, and specific needs. Explore our{" "}
+                <Link href="/services" className="text-gold-600 underline underline-offset-2 hover:text-gold-700">
+                  full range of services
+                </Link>{" "}
+                or check our{" "}
+                <Link href="/cost-guide" className="text-gold-600 underline underline-offset-2 hover:text-gold-700">
+                  cost guide
+                </Link>{" "}
+                for transparent pricing across all six towns.
               </p>
             </div>
           </div>

@@ -69,7 +69,7 @@ export default function CaretakersPage() {
               ].map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="text-center">
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-navy-900 mb-5 shadow-luxury">
-                    <Icon className="w-6 h-6 text-gold-400" />
+                    <Icon className="w-6 h-6 text-gold-400" aria-hidden="true" />
                   </div>
                   <h3 className="font-serif font-bold text-navy-900">{title}</h3>
                   <p className="mt-2 text-sm text-navy-600 leading-relaxed">{desc}</p>

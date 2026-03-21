@@ -216,8 +216,27 @@ const priorityColors: Record<string, string> = {
 };
 
 export default function MaintenanceCalendarPage() {
+  const howToJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "Martha's Vineyard Home Maintenance Calendar",
+    description:
+      "Month-by-month maintenance guide for Martha's Vineyard second homes, covering winterization, spring opening, summer management, and fall closing.",
+    totalTime: "P12M",
+    step: calendar.map((month, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: `${month.month} — ${month.priority} Priority`,
+      text: month.tasks.join(". "),
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+      />
       {/* Hero */}
       <section className="bg-navy-950 text-white section-padding relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />

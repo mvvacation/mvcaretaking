@@ -63,8 +63,7 @@ export default function TownPage({ params }: Props) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: "https://mvcaretaking.com" },
-      { "@type": "ListItem", position: 2, name: "Towns", item: "https://mvcaretaking.com" },
-      { "@type": "ListItem", position: 3, name: town.name, item: `https://mvcaretaking.com/towns/${town.slug}` },
+      { "@type": "ListItem", position: 2, name: town.name, item: `https://mvcaretaking.com/towns/${town.slug}` },
     ],
   };
 

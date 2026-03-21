@@ -261,14 +261,14 @@ export default function WhatIsACaretakerPage() {
                   "Rodent / pest detection",
                   "Landscape oversight",
                 ].map((capability, i) => {
-                  const caretaker = <CheckCircle className="w-5 h-5 text-sage-600 mx-auto" />;
+                  const caretaker = <><CheckCircle className="w-5 h-5 text-sage-600 mx-auto" aria-hidden="true" /><span className="sr-only">Yes</span></>;
                   const alarm =
                     capability === "Detects break-ins"
-                      ? <CheckCircle className="w-5 h-5 text-sage-600 mx-auto" />
+                      ? <><CheckCircle className="w-5 h-5 text-sage-600 mx-auto" aria-hidden="true" /><span className="sr-only">Yes</span></>
                       : capability === "Detects burst pipes"
-                      ? <AlertTriangle className="w-5 h-5 text-gold-500 mx-auto" />
-                      : <XCircle className="w-5 h-5 text-red-400 mx-auto" />;
-                  const nothing = <XCircle className="w-5 h-5 text-red-400 mx-auto" />;
+                      ? <><AlertTriangle className="w-5 h-5 text-gold-500 mx-auto" aria-hidden="true" /><span className="sr-only">Partial</span></>
+                      : <><XCircle className="w-5 h-5 text-red-400 mx-auto" aria-hidden="true" /><span className="sr-only">No</span></>;
+                  const nothing = <><XCircle className="w-5 h-5 text-red-400 mx-auto" aria-hidden="true" /><span className="sr-only">No</span></>;
                   return (
                     <tr
                       key={capability}

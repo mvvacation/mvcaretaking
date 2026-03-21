@@ -15,7 +15,7 @@ If you own a second home on Martha's Vineyard and you're not on-island year-roun
 
 ## The Numbers Tell the Story
 
-Martha's Vineyard has over ${"{"}10,700${"}"} seasonal homes — that's 56–63% of all housing units on the island. The average MV home sold for $2.6 million in 2025. Most of these properties sit unattended for 8–10 months per year.
+Martha's Vineyard has over 10,700+ seasonal homes — that's 56–63% of all housing units on the island. The average MV home sold for $2.6 million in 2025. Most of these properties sit unattended for 8–10 months per year.
 
 That's millions of dollars of real estate with no one watching it through nor'easters, frozen pipes, power outages, pest invasions, and coastal storms.
 
@@ -779,6 +779,7 @@ export default function BlogPostPage({ params }: Props) {
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
+    image: "https://mvcaretaking.com/opengraph-image",
     author: { "@type": "Person", name: post.author },
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
@@ -951,6 +952,34 @@ export default function BlogPostPage({ params }: Props) {
               Get a Free Quote →
             </Link>
           </div>
+
+          {/* Related Articles */}
+          {(() => {
+            const related = BLOG_POSTS.filter((p) => p.slug !== params.slug).slice(0, 3);
+            return (
+              <div className="mt-16">
+                <h3 className="text-xl font-serif font-bold text-navy-900 mb-6">
+                  Read Next
+                </h3>
+                <div className="grid sm:grid-cols-3 gap-6">
+                  {related.map((r) => (
+                    <Link
+                      key={r.slug}
+                      href={`/blog/${r.slug}`}
+                      className="group rounded-xl border border-navy-100/50 p-5 hover:shadow-luxury transition-shadow duration-300"
+                    >
+                      <h4 className="text-sm font-bold text-navy-900 group-hover:text-gold-700 transition-colors leading-snug">
+                        {r.title}
+                      </h4>
+                      <p className="mt-2 text-xs text-navy-500">
+                        {r.readingTime} min read
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Disclaimer */}
           <p className="mt-8 text-xs text-navy-400 leading-relaxed">

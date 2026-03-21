@@ -64,7 +64,7 @@ export default function CostGuidePage() {
               <p className="text-xl font-bold text-navy-900">{MARKET_STATS.seasonalHomes}</p>
             </div>
             <div>
-              <p className="text-xs text-navy-500 uppercase tracking-luxe">Typical Annual Cost</p>
+              <p className="text-xs text-navy-500 uppercase tracking-luxe">Standard Annual Cost</p>
               <p className="text-xl font-bold text-navy-900">{MARKET_STATS.averageCaretakingCost}</p>
             </div>
             <div>
@@ -207,19 +207,19 @@ export default function CostGuidePage() {
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { town: "Edgartown", avg: "$3.6M", range: "$350–$800/mo", note: "Highest STR concentration — turnover management drives cost" },
-              { town: "Oak Bluffs", avg: "$1.2M", range: "$200–$500/mo", note: "Most affordable entry; older stock needs more hands-on maintenance" },
-              { town: "Vineyard Haven", avg: "$1.75M", range: "$250–$600/mo", note: "Year-round town; best contractor availability on island" },
-              { town: "Chilmark", avg: "$6.4M", range: "$800–$4,000/mo", note: "Highest values demand full estate management; remote location premium" },
-              { town: "West Tisbury", avg: "$2.5M", range: "$400–$1,000/mo", note: "Large parcels with outbuildings; new strict STR regulations" },
-              { town: "Aquinnah", avg: "$3.5M", range: "$600–$1,500/mo", note: "Most remote; cliff exposure and limited contractor access" },
+              { town: "Edgartown", slug: "edgartown", avg: "$3.6M", range: "$350–$800/mo", note: "Highest STR concentration — turnover management drives cost" },
+              { town: "Oak Bluffs", slug: "oak-bluffs", avg: "$1.2M", range: "$200–$500/mo", note: "Most affordable entry; older stock needs more hands-on maintenance" },
+              { town: "Vineyard Haven", slug: "vineyard-haven", avg: "$1.75M", range: "$250–$600/mo", note: "Year-round town; best contractor availability on island" },
+              { town: "Chilmark", slug: "chilmark", avg: "$6.4M", range: "$800–$4,000/mo", note: "Highest values demand full estate management; remote location premium" },
+              { town: "West Tisbury", slug: "west-tisbury", avg: "$2.5M", range: "$400–$1,000/mo", note: "Large parcels with outbuildings; new strict STR regulations" },
+              { town: "Aquinnah", slug: "aquinnah", avg: "$3.5M", range: "$600–$1,500/mo", note: "Most remote; cliff exposure and limited contractor access" },
             ].map((t) => (
-              <div key={t.town} className="bg-navy-50 rounded-2xl p-6">
-                <h3 className="font-semibold text-navy-900">{t.town}</h3>
+              <Link key={t.town} href={`/towns/${t.slug}`} className="bg-navy-50 rounded-2xl p-6 hover:shadow-luxury transition-shadow duration-300 group">
+                <h3 className="font-semibold text-navy-900 group-hover:text-gold-700 transition-colors">{t.town}</h3>
                 <p className="text-xs text-navy-500 mt-1">Avg. sale price: {t.avg}</p>
                 <p className="text-2xl font-bold text-gold-700 mt-2">{t.range}</p>
                 <p className="text-xs text-navy-600 mt-2 leading-relaxed">{t.note}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
