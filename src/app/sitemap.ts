@@ -14,13 +14,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogSlugs = [
     "do-i-need-a-caretaker-marthas-vineyard",
-    "cost-of-caretaking-marthas-vineyard-2025",
+    "cost-of-caretaking-marthas-vineyard-2026",
     "choosing-the-right-caretaker-mv",
     "insurance-requirements-vacant-mv-homes",
     "winter-storm-prep-marthas-vineyard",
     "seasonal-opening-closing-checklist",
     "mv-second-home-management-guide",
-    "mv-str-regulations-2025",
+    "mv-str-regulations-2026",
   ];
 
 

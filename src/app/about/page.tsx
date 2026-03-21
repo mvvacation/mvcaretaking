@@ -43,8 +43,26 @@ const values = [
 ];
 
 export default function AboutPage() {
+  const orgJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "MVCaretaking",
+    url: "https://mvcaretaking.com",
+    description: "Martha's Vineyard's free caretaker matching service connecting second-home owners with vetted, bonded, year-round island professionals.",
+    areaServed: {
+      "@type": "Place",
+      name: "Martha's Vineyard, Massachusetts",
+    },
+    foundingDate: "2024",
+    serviceType: "Property Caretaker Matching",
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+      />
       {/* Header */}
       <section className="bg-navy-950 text-white section-padding pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />

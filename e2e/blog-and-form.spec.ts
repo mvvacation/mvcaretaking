@@ -25,7 +25,7 @@ test.describe("Blog article rendering", () => {
   });
 
   test("shows CTA in blog article", async ({ page }) => {
-    await page.goto("/blog/cost-of-caretaking-marthas-vineyard-2025");
+    await page.goto("/blog/cost-of-caretaking-marthas-vineyard-2026");
     await expect(page.getByRole("link", { name: /Get a Free Quote/ })).toBeVisible();
   });
 
@@ -83,13 +83,22 @@ test.describe("Form submission flow", () => {
   test("successful submission redirects to thank you page", async ({ page }) => {
     await page.goto("/get-a-quote");
 
-    // Use more specific selectors to avoid resolving to multiple elements
     const form = page.locator("form");
+    // Step 0: Contact info
     await form.getByLabel(/First Name/i).fill("Test");
     await form.getByLabel(/Last Name/i).fill("User");
     await form.getByLabel(/Email/i).fill("test@example.com");
     await form.getByLabel(/Phone/i).fill("508-555-0100");
+    await page.getByRole("button", { name: /Continue/i }).click();
+
+    // Step 1: Property details
     await form.getByLabel(/Town/i).selectOption("Edgartown");
+    await page.getByRole("button", { name: /Continue/i }).click();
+
+    // Step 2: Services — skip, continue
+    await page.getByRole("button", { name: /Continue/i }).click();
+
+    // Step 3: Additional details
     await form.getByLabel(/Tell us more/i).fill("Testing form submission");
 
     // Intercept the API call to avoid DB dependency
@@ -112,11 +121,20 @@ test.describe("Form submission flow", () => {
     await page.goto("/get-a-quote");
 
     const form = page.locator("form");
+    // Step 0
     await form.getByLabel(/First Name/i).fill("Test");
     await form.getByLabel(/Last Name/i).fill("User");
     await form.getByLabel(/Email/i).fill("test@example.com");
-    await form.getByLabel(/Town/i).selectOption("Edgartown");
+    await page.getByRole("button", { name: /Continue/i }).click();
 
+    // Step 1
+    await form.getByLabel(/Town/i).selectOption("Edgartown");
+    await page.getByRole("button", { name: /Continue/i }).click();
+
+    // Step 2: Skip
+    await page.getByRole("button", { name: /Continue/i }).click();
+
+    // Step 3: Submit
     // Intercept the API call to simulate error
     await page.route("**/api/leads", (route) => {
       route.fulfill({

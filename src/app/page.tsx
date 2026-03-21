@@ -471,6 +471,58 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============ TESTIMONIALS ============ */}
+      <section className="section-padding bg-navy-50/50">
+        <div className="container-narrow">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="section-label">Homeowner Stories</span>
+            <h2 className="mt-4 text-3xl sm:text-4xl font-serif font-bold text-navy-900">
+              What MV Homeowners Say
+            </h2>
+            <div className="divider-gold mt-8" />
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "Found a reliable caretaker through MVCaretaking within days. Our Edgartown waterfront home is finally in good hands year-round.",
+                name: "Sarah M.",
+                town: "Edgartown",
+                type: "Waterfront Estate Owner",
+              },
+              {
+                quote: "After a nor'easter damaged our neighbor's unmonitored home, we signed up immediately. The peace of mind is worth every penny.",
+                name: "Michael C.",
+                town: "Chilmark",
+                type: "Second Home Owner",
+              },
+              {
+                quote: "Managing our rental property from Boston was a nightmare until MVCaretaking matched us with a fantastic local team.",
+                name: "Jennifer & David R.",
+                town: "Oak Bluffs",
+                type: "STR Investors",
+              },
+            ].map((t) => (
+              <blockquote key={t.name} className="bg-white rounded-2xl p-7 border border-navy-100/50 shadow-sm">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-navy-700 text-sm leading-relaxed italic">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <footer className="mt-4 pt-4 border-t border-navy-100">
+                  <p className="text-sm font-semibold text-navy-900">{t.name}</p>
+                  <p className="text-xs text-navy-500">{t.type} · {t.town}</p>
+                </footer>
+              </blockquote>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ============ RESOURCE HUB ============ */}
       <section className="section-padding bg-sand-50">
         <div className="container-narrow">
@@ -483,7 +535,7 @@ export default function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: DollarSign, title: "2025 Cost Guide", desc: "Transparent pricing from $60/visit to $50K/year estate management.", href: "/cost-guide" },
+              { icon: DollarSign, title: "2026 Cost Guide", desc: "Transparent pricing from $60/visit to $50K/year estate management.", href: "/cost-guide" },
               { icon: Calendar, title: "Maintenance Calendar", desc: "Month-by-month seasonal maintenance schedule for MV homes.", href: "/maintenance-calendar" },
               { icon: BookOpen, title: "What Is a Caretaker?", desc: "Everything a property caretaker does — the complete breakdown.", href: "/what-is-a-caretaker" },
               { icon: Newspaper, title: "MV Journal", desc: "Storm prep, insurance insights, STR regulations, and more.", href: "/blog" },

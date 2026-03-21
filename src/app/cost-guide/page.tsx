@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 import { PRICING_DATA, MARKET_STATS } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Martha's Vineyard Caretaking Cost Guide (2025)",
+  title: "Martha's Vineyard Caretaking Cost Guide (2026)",
   description:
     "The most transparent caretaking pricing guide on Martha's Vineyard. From $60/visit basic inspections to $50,000/year full estate management. Real market data, no surprises.",
   alternates: { canonical: "https://mvcaretaking.com/cost-guide" },
@@ -28,18 +28,43 @@ export default function CostGuidePage() {
     ],
   };
 
+  const priceGuideJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Martha's Vineyard Caretaking Cost Guide (2026)",
+    description: "Transparent caretaking pricing for Martha's Vineyard: from $60/visit basic inspections to $50,000/year full estate management.",
+    url: "https://mvcaretaking.com/cost-guide",
+    mainEntity: {
+      "@type": "Service",
+      name: "Martha's Vineyard Property Caretaking",
+      provider: { "@type": "Organization", name: "MVCaretaking", url: "https://mvcaretaking.com" },
+      areaServed: { "@type": "Place", name: "Martha's Vineyard, Massachusetts" },
+      offers: {
+        "@type": "AggregateOffer",
+        priceCurrency: "USD",
+        lowPrice: "3600",
+        highPrice: "50000",
+        offerCount: "4",
+      },
+    },
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(priceGuideJsonLd) }}
+      />
       {/* Hero */}
       <section className="bg-navy-950 text-white pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/5 via-transparent to-transparent" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <Breadcrumbs dark items={[{ label: "Cost Guide" }]} />
-          <p className="section-label">2025 Pricing Guide</p>
+          <p className="section-label">2026 Pricing Guide</p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6">
             What Does Caretaking Cost on Martha&apos;s Vineyard?
           </h1>

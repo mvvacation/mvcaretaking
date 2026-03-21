@@ -56,16 +56,13 @@ test.describe("Mobile viewport", () => {
   test("get-a-quote form is usable on mobile", async ({ page }) => {
     await page.goto("/get-a-quote");
     await expect(page.getByLabel(/First Name/i)).toBeVisible();
-    await expect(page.getByRole("button", { name: /Submit/i })).toBeVisible();
-    // Service checkboxes should be visible
-    const checkboxes = page.getByRole("checkbox");
-    const count = await checkboxes.count();
-    expect(count).toBeGreaterThanOrEqual(1);
+    // Multi-step form: step 0 shows Continue, not Submit
+    await expect(page.getByRole("button", { name: /Continue/i })).toBeVisible();
   });
 
   test("footer is accessible on mobile", async ({ page }) => {
     await page.goto("/");
-    const footer = page.locator("footer");
+    const footer = page.locator("footer[aria-label='Site footer']");
     await footer.scrollIntoViewIfNeeded();
     await expect(footer).toBeVisible();
     await expect(footer.getByRole("link", { name: "Services" })).toBeVisible();

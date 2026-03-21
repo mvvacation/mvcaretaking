@@ -58,7 +58,7 @@ Every week on Martha's Vineyard, a homeowner discovers damage that could have be
 
 If you're ready to find the right caretaker for your MV property, our free matching service connects you with vetted, bonded professionals who know your town and your type of property.
   `,
-  "cost-of-caretaking-marthas-vineyard-2025": `
+  "cost-of-caretaking-marthas-vineyard-2026": `
 One of the most common questions we hear from Martha's Vineyard homeowners is: "How much should I expect to pay for caretaking?" Until now, finding transparent pricing has been nearly impossible — no competitor publishes rates. Here's the first comprehensive guide with real market data.
 
 ## Quick Answer: What You'll Pay
@@ -616,8 +616,8 @@ If you're a new MV homeowner, here's your priority checklist:
 
 Our free matching service connects you with vetted, bonded caretakers who specialize in your town and property type. There's no obligation — just a better way to protect your investment.
   `,
-  "mv-str-regulations-2025": `
-Martha's Vineyard is in the middle of an island-wide reckoning with short-term rentals. With over 4,000 registered STRs generating $9.4 million in tax revenue, every town is now actively regulating the market — and each one is doing it differently. Here's what property owners need to know in 2025.
+  "mv-str-regulations-2026": `
+Martha's Vineyard is in the middle of an island-wide reckoning with short-term rentals. With over 4,000 registered STRs generating $9.4 million in tax revenue, every town is now actively regulating the market — and each one is doing it differently. Here's what property owners need to know in 2026.
 
 ## The Big Picture
 

@@ -62,7 +62,7 @@ test.describe("Homepage", () => {
 
   test("resource links are present", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("link", { name: /2025 Cost Guide/i }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: /2026 Cost Guide/i }).first()).toBeVisible();
     await expect(page.getByRole("link", { name: /Maintenance Calendar/i }).first()).toBeVisible();
   });
 

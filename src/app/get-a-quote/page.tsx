@@ -2,13 +2,21 @@
 
 import { Suspense, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { Loader2, User, Home, Wrench, MessageSquare, ChevronRight, ChevronLeft } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { MV_TOWNS, SERVICE_CATEGORIES, PROPERTY_TYPES } from "@/lib/data";
+
+const STEPS = [
+  { label: "Contact", icon: User },
+  { label: "Property", icon: Home },
+  { label: "Services", icon: Wrench },
+  { label: "Details", icon: MessageSquare },
+] as const;
 
 function QuoteForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [step, setStep] = useState(0);
 
   const [form, setForm] = useState({
     firstName: "",
@@ -55,6 +63,26 @@ function QuoteForm() {
         ? prev.services.filter((s) => s !== svc)
         : [...prev.services, svc],
     }));
+  }
+
+  function canAdvance(): boolean {
+    if (step === 0) return !!(form.firstName && form.lastName && form.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email));
+    if (step === 1) return !!form.town;
+    return true;
+  }
+
+  function nextStep() {
+    if (canAdvance() && step < 3) {
+      setStep(step + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
+  function prevStep() {
+    if (step > 0) {
+      setStep(step - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -107,10 +135,37 @@ function QuoteForm() {
       <section className="section-padding pt-8">
         <div className="container-narrow">
           <div className="max-w-2xl mx-auto">
+            {/* Step indicator */}
+            <div className="flex items-center justify-between mb-8" role="navigation" aria-label="Form progress">
+              {STEPS.map(({ label, icon: Icon }, i) => (
+                <div key={label} className="flex items-center flex-1 last:flex-none">
+                  <button
+                    type="button"
+                    onClick={() => { if (i < step || (i === step + 1 && canAdvance())) setStep(i); }}
+                    className={`flex flex-col items-center gap-1.5 transition-colors ${
+                      i <= step ? "text-gold-600" : "text-navy-300"
+                    }`}
+                    aria-current={i === step ? "step" : undefined}
+                  >
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
+                      i < step ? "bg-gold-500 text-white" : i === step ? "bg-gold-50 border-2 border-gold-500 text-gold-700" : "bg-navy-50 border border-navy-200 text-navy-400"
+                    }`}>
+                      <Icon className="w-4 h-4" aria-hidden="true" />
+                    </div>
+                    <span className="text-xs font-medium hidden sm:block">{label}</span>
+                  </button>
+                  {i < 3 && (
+                    <div className={`flex-1 h-0.5 mx-2 rounded transition-colors ${i < step ? "bg-gold-400" : "bg-navy-100"}`} />
+                  )}
+                </div>
+              ))}
+            </div>
+            <p className="text-center text-sm text-navy-400 mb-6">Step {step + 1} of 4 · Under 2 minutes</p>
+
             <form onSubmit={handleSubmit} className="space-y-8">
               <fieldset disabled={submitting} aria-busy={submitting} className="space-y-8">
               {/* Contact Information */}
-              <fieldset>
+              <fieldset className={step === 0 ? "" : "hidden"}>
                 <legend className="text-xl font-serif font-bold text-navy-900 mb-4">
                   Your Information <span className="sr-only">(fields marked with * are required)</span>
                 </legend>
@@ -198,7 +253,7 @@ function QuoteForm() {
               </fieldset>
 
               {/* Property Details */}
-              <fieldset>
+              <fieldset className={step === 1 ? "" : "hidden"}>
                 <legend className="text-xl font-serif font-bold text-navy-900 mb-4">
                   Property Details
                 </legend>
@@ -254,7 +309,7 @@ function QuoteForm() {
               </fieldset>
 
               {/* Services Needed */}
-              <fieldset>
+              <fieldset className={step === 2 ? "" : "hidden"}>
                 <legend className="text-xl font-serif font-bold text-navy-900 mb-4">
                   Services Needed
                 </legend>
@@ -284,7 +339,7 @@ function QuoteForm() {
               </fieldset>
 
               {/* Additional Details */}
-              <fieldset>
+              <fieldset className={step === 3 ? "" : "hidden"}>
                 <legend className="text-xl font-serif font-bold text-navy-900 mb-4">
                   Additional Details
                 </legend>
@@ -350,21 +405,46 @@ function QuoteForm() {
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={submitting}
-                aria-busy={submitting}
-                className="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                {submitting ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Submitting...
-                  </>
-                ) : (
-                  "Submit & Get Matched Free"
+              {/* Navigation buttons */}
+              <div className="flex gap-3">
+                {step > 0 && (
+                  <button
+                    type="button"
+                    onClick={prevStep}
+                    className="btn-outline flex items-center gap-2 px-6"
+                  >
+                    <ChevronLeft className="w-4 h-4" aria-hidden="true" />
+                    Back
+                  </button>
                 )}
-              </button>
+                {step < 3 ? (
+                  <button
+                    type="button"
+                    onClick={nextStep}
+                    disabled={!canAdvance()}
+                    className="btn-primary flex-1 flex items-center justify-center gap-2 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Continue
+                    <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    aria-busy={submitting}
+                    className="btn-primary flex-1 text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {submitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      "Submit & Get Matched Free"
+                    )}
+                  </button>
+                )}
+              </div>
 
               <p className="text-xs text-navy-400 text-center">
                 Your information is kept private and only shared with matched

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check } from "lucide-react";
+import { Check, Star, Clock, Shield } from "lucide-react";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 export const metadata: Metadata = {
   title: "Thank You — Your Request Was Submitted",
@@ -79,6 +80,30 @@ export default function ThankYouPage() {
             <Link href="/" className="btn-outline">
               Back to Home
             </Link>
+          </div>
+
+          {/* Social proof */}
+          <div className="mt-12 grid sm:grid-cols-3 gap-6">
+            <div className="flex flex-col items-center gap-2 p-4 bg-navy-50 rounded-xl">
+              <Clock className="w-5 h-5 text-gold-600" aria-hidden="true" />
+              <span className="text-sm font-semibold text-navy-900">Under 24 hrs</span>
+              <span className="text-xs text-navy-500">Average response time</span>
+            </div>
+            <div className="flex flex-col items-center gap-2 p-4 bg-navy-50 rounded-xl">
+              <Shield className="w-5 h-5 text-gold-600" aria-hidden="true" />
+              <span className="text-sm font-semibold text-navy-900">100% Vetted</span>
+              <span className="text-xs text-navy-500">Bonded & insured providers</span>
+            </div>
+            <div className="flex flex-col items-center gap-2 p-4 bg-navy-50 rounded-xl">
+              <Star className="w-5 h-5 text-gold-600" aria-hidden="true" />
+              <span className="text-sm font-semibold text-navy-900">All 6 Towns</span>
+              <span className="text-xs text-navy-500">Full MV island coverage</span>
+            </div>
+          </div>
+
+          {/* Newsletter */}
+          <div className="mt-10">
+            <NewsletterSignup variant="blog" />
           </div>
 
           <p className="mt-8 text-sm text-navy-400">

@@ -89,6 +89,38 @@ export default function BlogPostPage({ params }: Props) {
     ],
   };
 
+  // Auto-link key terms to internal pages (max 1 link per term per article)
+  const linkedTerms = new Set<string>();
+  const INTERNAL_LINKS: { pattern: RegExp; href: string; label: string }[] = [
+    { pattern: /\bcost(?:s)? of caretaking\b/i, href: "/cost-guide", label: "cost of caretaking" },
+    { pattern: /\bget a (?:free )?quote\b/i, href: "/get-a-quote", label: "get a free quote" },
+    { pattern: /\bseasonal (?:opening|closing)\b/i, href: "/services", label: "seasonal opening & closing" },
+    { pattern: /\bstorm prep\b/i, href: "/blog/winter-storm-prep-marthas-vineyard", label: "storm prep" },
+    { pattern: /\brental turnover\b/i, href: "/services", label: "rental turnover" },
+    { pattern: /\binsurance requirement/i, href: "/blog/insurance-requirements-vacant-mv-homes", label: "insurance requirements" },
+  ];
+
+  function enrichText(text: string): React.ReactNode[] {
+    const nodes: React.ReactNode[] = [];
+    let remaining = text;
+    let key = 0;
+
+    for (const { pattern, href, label } of INTERNAL_LINKS) {
+      if (linkedTerms.has(label)) continue;
+      const match = remaining.match(pattern);
+      if (match && match.index !== undefined) {
+        linkedTerms.add(label);
+        const before = remaining.slice(0, match.index);
+        const matched = remaining.slice(match.index, match.index + match[0].length);
+        remaining = remaining.slice(match.index + match[0].length);
+        if (before) nodes.push(<span key={key++}>{before}</span>);
+        nodes.push(<Link key={key++} href={href} className="text-gold-600 underline underline-offset-2 hover:text-gold-700 transition-colors">{matched}</Link>);
+      }
+    }
+    if (remaining) nodes.push(<span key={key++}>{remaining}</span>);
+    return nodes.length > 0 ? nodes : [text];
+  }
+
   // Simple markdown-like rendering
   const renderContent = (text: string) => {
     return text
@@ -159,7 +191,7 @@ export default function BlogPostPage({ params }: Props) {
             </ol>
           );
         }
-        // Bold text processing
+        // Bold text processing with internal linking
         const parts = trimmed.split(/(\*\*[^*]+\*\*)/g);
         return (
           <p key={i} className="text-navy-700 leading-relaxed mb-4">
@@ -169,7 +201,7 @@ export default function BlogPostPage({ params }: Props) {
                   {part.slice(2, -2)}
                 </strong>
               ) : (
-                part
+                <span key={j}>{enrichText(part)}</span>
               )
             )}
           </p>
@@ -226,6 +258,19 @@ export default function BlogPostPage({ params }: Props) {
           )}
 
           <ShareButtons title={post.title} slug={params.slug} />
+
+          {/* Author bio */}
+          <div className="mt-8 flex items-center gap-4 p-5 bg-navy-50 rounded-xl border border-navy-100">
+            <div className="w-12 h-12 rounded-full bg-navy-900 flex items-center justify-center flex-shrink-0">
+              <span className="text-gold-400 text-sm font-bold">MV</span>
+            </div>
+            <div>
+              <p className="font-semibold text-navy-900 text-sm">{post.author}</p>
+              <p className="text-xs text-navy-500 mt-0.5">
+                Local experts serving Martha&apos;s Vineyard homeowners with property care guidance, seasonal checklists, and caretaker matching since 2024.
+              </p>
+            </div>
+          </div>
 
           {/* Newsletter */}
           <div className="mt-10">

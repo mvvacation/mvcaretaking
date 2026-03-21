@@ -7,24 +7,30 @@ test.describe("Get a Quote form", () => {
 
   test("form has all required fields", async ({ page }) => {
     const form = page.locator("form");
+    // Step 0: Contact info
     await expect(form.getByLabel(/First Name/i)).toBeVisible();
     await expect(form.getByLabel(/Last Name/i)).toBeVisible();
     await expect(form.getByLabel(/Email/i)).toBeVisible();
     await expect(form.getByLabel(/Phone/i)).toBeVisible();
+
+    // Fill step 0 and advance
+    await form.getByLabel(/First Name/i).fill("Test");
+    await form.getByLabel(/Last Name/i).fill("User");
+    await form.getByLabel(/Email/i).fill("test@example.com");
+    await page.getByRole("button", { name: /Continue/i }).click();
+
+    // Step 1: Property details
     await expect(form.getByLabel(/Town/i)).toBeVisible();
     await expect(form.getByLabel(/Property Type/i)).toBeVisible();
   });
 
   test("shows validation errors on empty submit", async ({ page }) => {
-    const submitBtn = page.getByRole("button", { name: /Submit/i });
-    await submitBtn.click();
+    // On step 0, Continue should be disabled without required fields
+    const continueBtn = page.getByRole("button", { name: /Continue/i });
+    await expect(continueBtn).toBeDisabled();
 
-    // HTML5 validation should prevent submission — first name is required
-    const firstName = page.getByLabel(/First Name/i);
-    const validationMessage = await firstName.evaluate(
-      (el: HTMLInputElement) => el.validationMessage
-    );
-    expect(validationMessage).toBeTruthy();
+    // Should still be on step 0 — fields are still visible
+    await expect(page.getByLabel(/First Name/i)).toBeVisible();
   });
 
   test("email field validates format", async ({ page }) => {
@@ -32,7 +38,6 @@ test.describe("Get a Quote form", () => {
     await emailField.fill("not-an-email");
     await emailField.blur();
 
-    // Check the HTML5 validity
     const isValid = await emailField.evaluate(
       (el: HTMLInputElement) => el.validity.valid
     );
@@ -40,11 +45,16 @@ test.describe("Get a Quote form", () => {
   });
 
   test("town dropdown has all 6 MV towns", async ({ page }) => {
+    // Navigate to step 1
     const form = page.locator("form");
+    await form.getByLabel(/First Name/i).fill("Test");
+    await form.getByLabel(/Last Name/i).fill("User");
+    await form.getByLabel(/Email/i).fill("test@example.com");
+    await page.getByRole("button", { name: /Continue/i }).click();
+
     const townSelect = form.getByLabel(/Town/i);
     await expect(townSelect).toBeVisible();
     const options = townSelect.locator("option");
-    // 6 towns + 1 placeholder = at minimum 7
     const count = await options.count();
     expect(count).toBeGreaterThanOrEqual(7);
   });
@@ -74,7 +84,13 @@ test.describe("Get a Quote form", () => {
   });
 
   test("shows error when town is empty after blur", async ({ page }) => {
+    // Navigate to step 1
     const form = page.locator("form");
+    await form.getByLabel(/First Name/i).fill("Test");
+    await form.getByLabel(/Last Name/i).fill("User");
+    await form.getByLabel(/Email/i).fill("test@example.com");
+    await page.getByRole("button", { name: /Continue/i }).click();
+
     const town = form.getByLabel(/Town/i);
     await town.focus();
     await town.blur();
@@ -99,6 +115,16 @@ test.describe("Get a Quote form", () => {
   });
 
   test("service checkboxes toggle correctly", async ({ page }) => {
+    // Navigate to step 2 (services)
+    const form = page.locator("form");
+    await form.getByLabel(/First Name/i).fill("Test");
+    await form.getByLabel(/Last Name/i).fill("User");
+    await form.getByLabel(/Email/i).fill("test@example.com");
+    await page.getByRole("button", { name: /Continue/i }).click();
+
+    await form.getByLabel(/Town/i).selectOption("Edgartown");
+    await page.getByRole("button", { name: /Continue/i }).click();
+
     const checkbox = page.getByRole("checkbox").first();
     await expect(checkbox).not.toBeChecked();
     await checkbox.check();
