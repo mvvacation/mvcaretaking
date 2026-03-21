@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   title: "About Us — MVCaretaking",
   description:
     "MVCaretaking is Martha's Vineyard's free caretaker matching service. We connect second-home owners with vetted, bonded, year-round island professionals across all 6 MV towns.",
+  keywords: [
+    "MVCaretaking about",
+    "Martha's Vineyard caretaker service",
+    "island property professionals",
+  ],
   alternates: { canonical: "https://mvcaretaking.com/about" },
 };
 

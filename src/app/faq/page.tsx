@@ -6,6 +6,12 @@ export const metadata: Metadata = {
   title: "FAQ — Frequently Asked Questions",
   description:
     "Answers to common questions about Martha's Vineyard caretaking services, costs, hiring process, and property management on MV.",
+  keywords: [
+    "Martha's Vineyard caretaker FAQ",
+    "caretaking cost questions",
+    "property management FAQ",
+    "MV home watch questions",
+  ],
   alternates: { canonical: "https://mvcaretaking.com/faq" },
 };
 

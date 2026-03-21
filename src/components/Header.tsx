@@ -85,7 +85,7 @@ export default function Header() {
               <span className="text-white font-serif font-bold text-base">MV</span>
             </div>
             <div className="flex flex-col">
-              <span className={`text-lg font-serif font-semibold leading-tight tracking-wide transition-colors duration-300 ${scrolled ? "text-navy-900" : "text-white"}`}>
+              <span className={`text-lg font-serif font-semibold leading-tight tracking-luxe transition-colors duration-300 ${scrolled ? "text-navy-900" : "text-white"}`}>
                 MVCaretaking
               </span>
               <span className={`text-[10px] uppercase tracking-luxe leading-tight hidden sm:block transition-colors duration-300 ${scrolled ? "text-navy-400" : "text-white/60"}`}>

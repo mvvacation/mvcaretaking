@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   title: "Caretaker Directory — Martha's Vineyard Caretaking Professionals",
   description:
     "Find vetted, bonded caretaking professionals on Martha's Vineyard. Our directory connects you with trusted, year-round island-based property caretakers serving all 6 MV towns.",
+  keywords: [
+    "Martha's Vineyard caretaker directory",
+    "MV property caretaker",
+    "vetted caretaking professionals",
+  ],
   alternates: { canonical: "https://mvcaretaking.com/caretakers" },
   robots: { index: false, follow: true },
 };

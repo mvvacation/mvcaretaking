@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: "Blog — Martha's Vineyard Caretaking Tips & Guides",
   description:
     "Expert guides on Martha's Vineyard property care: storm prep, seasonal checklists, cost breakdowns, and caretaker hiring tips for MV second-home owners.",
+  keywords: [
+    "Martha's Vineyard home care tips",
+    "MV property management blog",
+    "caretaker hiring guide",
+    "seasonal home checklist",
+  ],
   alternates: { canonical: "https://mvcaretaking.com/blog" },
 };
 

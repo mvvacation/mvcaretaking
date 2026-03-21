@@ -21,7 +21,13 @@ function isRateLimited(ip: string): boolean {
     });
     lastCleanup = now;
   }
-  // Hard cap to prevent unbounded memory growth
+  // Soft cap: evict expired entries when approaching limit
+  if (rateLimitMap.size > 5000) {
+    rateLimitMap.forEach((entry, key) => {
+      if (now > entry.resetAt) rateLimitMap.delete(key);
+    });
+  }
+  // Hard cap fallback
   if (rateLimitMap.size > 10000) {
     rateLimitMap.clear();
   }

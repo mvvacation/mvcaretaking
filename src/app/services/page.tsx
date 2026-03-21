@@ -8,6 +8,13 @@ export const metadata: Metadata = {
   title: "Caretaking Services on Martha's Vineyard",
   description:
     "Comprehensive caretaking services for MV's 10,700+ seasonal homes: property inspections, storm response, seasonal management, rental turnovers, contractor coordination, and concierge prep.",
+  keywords: [
+    "Martha's Vineyard caretaking services",
+    "property inspection MV",
+    "storm response",
+    "seasonal home management",
+    "rental turnover service",
+  ],
   alternates: { canonical: "https://mvcaretaking.com/services" },
 };
 

@@ -760,6 +760,14 @@ export function generateMetadata({ params }: Props): Metadata {
       type: "article",
       publishedTime: post.publishedAt,
       authors: [post.author],
+      images: [
+        {
+          url: "https://mvcaretaking.com/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
   };
 }
