@@ -45,9 +45,9 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function sanitize(value: unknown): string {
+function sanitize(value: unknown, maxLen = 1000): string {
   if (typeof value !== "string") return "";
-  return value.trim().slice(0, 1000);
+  return value.trim().slice(0, maxLen).replace(/[<>]/g, "");
 }
 
 export async function POST(req: NextRequest) {
@@ -72,15 +72,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const firstName = sanitize(body.firstName);
-    const lastName = sanitize(body.lastName);
-    const email = sanitize(body.email);
-    const phone = sanitize(body.phone);
-    const town = sanitize(body.town);
-    const propertyType = sanitize(body.propertyType);
-    const servicesNeeded = sanitize(body.servicesNeeded);
-    const message = sanitize(body.message);
-    const howHeard = sanitize(body.howHeard);
+    const firstName = sanitize(body.firstName, 100);
+    const lastName = sanitize(body.lastName, 100);
+    const email = sanitize(body.email, 254);
+    const phone = sanitize(body.phone, 20);
+    const town = sanitize(body.town, 50);
+    const propertyType = sanitize(body.propertyType, 100);
+    const servicesNeeded = sanitize(body.servicesNeeded, 500);
+    const message = sanitize(body.message, 2000);
+    const howHeard = sanitize(body.howHeard, 200);
 
     // Validate required fields
     if (!firstName || !lastName || !email || !town) {

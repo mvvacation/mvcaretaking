@@ -95,7 +95,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
             {navigation.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
               return (
@@ -122,12 +122,12 @@ export default function Header() {
                 Get a Quote
               </Link>
             </div>
-          </div>
+          </nav>
 
           {/* Mobile hamburger */}
           <button
             ref={hamburgerRef}
-            className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled ? "text-navy-700 hover:bg-navy-50" : "text-white hover:bg-white/10"}`}
+            className={`lg:hidden p-2 rounded-lg transition-all duration-200 ${mobileOpen ? (scrolled ? "bg-navy-100 text-navy-900" : "bg-white/20 text-white") : scrolled ? "text-navy-700 hover:bg-navy-50" : "text-white hover:bg-white/10"}`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}

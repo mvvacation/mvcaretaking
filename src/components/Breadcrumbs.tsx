@@ -15,7 +15,7 @@ export default function Breadcrumbs({ items, dark = false }: { items: Crumb[]; d
     <nav aria-label="Breadcrumb" className="mb-6">
       <ol className={`flex items-center gap-1.5 text-sm ${base} flex-wrap`}>
         <li>
-          <Link href="/" className={`${hoverClass} transition-colors`}>
+          <Link href="/" className={`${hoverClass} hover:underline underline-offset-2 transition-colors`}>
             Home
           </Link>
         </li>
@@ -23,7 +23,7 @@ export default function Breadcrumbs({ items, dark = false }: { items: Crumb[]; d
           <li key={i} className="flex items-center gap-1.5">
             <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
             {item.href ? (
-              <Link href={item.href} className={`${hoverClass} transition-colors`}>
+              <Link href={item.href} className={`${hoverClass} hover:underline underline-offset-2 transition-colors`}>
                 {item.label}
               </Link>
             ) : (

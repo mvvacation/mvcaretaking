@@ -259,9 +259,10 @@ export const BLOG_POSTS = [
     excerpt:
       "If you own a second home on MV and aren't on-island year-round, the answer is almost certainly yes. Here's why — and what happens when you don't have one.",
     author: "MVCaretaking Team",
-    publishedAt: "2026-03-15",
+    publishedAt: "2025-12-15",
     readingTime: 6,
     imageUrl: null,
+    tags: ["caretaking", "insurance", "property-protection"],
   },
   {
     slug: "cost-of-caretaking-marthas-vineyard-2025",
@@ -269,9 +270,10 @@ export const BLOG_POSTS = [
     excerpt:
       "The first transparent pricing guide for MV caretaking: from basic inspections at $60/visit to full estate management at $50,000/year, with real market data.",
     author: "MVCaretaking Team",
-    publishedAt: "2026-02-20",
+    publishedAt: "2025-11-20",
     readingTime: 8,
     imageUrl: null,
+    tags: ["costs", "pricing", "caretaking"],
   },
   {
     slug: "choosing-the-right-caretaker-mv",
@@ -279,9 +281,10 @@ export const BLOG_POSTS = [
     excerpt:
       "Bonded and insured? NHWA accredited? Year-round resident? Here are the 7 questions that separate great MV caretakers from risky ones.",
     author: "MVCaretaking Team",
-    publishedAt: "2026-02-05",
+    publishedAt: "2025-11-05",
     readingTime: 7,
     imageUrl: null,
+    tags: ["hiring", "caretaking", "vetting"],
   },
   {
     slug: "insurance-requirements-vacant-mv-homes",
@@ -289,9 +292,10 @@ export const BLOG_POSTS = [
     excerpt:
       "Your insurance company may deny claims on unattended homes without proof of regular monitoring. Here's what every MV second-home owner needs to know.",
     author: "MVCaretaking Team",
-    publishedAt: "2026-01-18",
+    publishedAt: "2025-10-18",
     readingTime: 7,
     imageUrl: null,
+    tags: ["insurance", "property-protection", "vacancy"],
   },
   {
     slug: "winter-storm-prep-marthas-vineyard",
@@ -299,9 +303,10 @@ export const BLOG_POSTS = [
     excerpt:
       "The 2024 season saw 3 major nor'easters hit the Vineyard. Homes without caretakers averaged $35,000 more in storm damage. Here's your complete prep checklist.",
     author: "MVCaretaking Team",
-    publishedAt: "2025-11-15",
+    publishedAt: "2025-09-15",
     readingTime: 8,
     imageUrl: null,
+    tags: ["storms", "seasonal", "property-protection"],
   },
   {
     slug: "seasonal-opening-closing-checklist",
@@ -309,9 +314,10 @@ export const BLOG_POSTS = [
     excerpt:
       "A single missed step during winterization can mean $100,000+ in damage. Our comprehensive checklist covers every system in your Vineyard home.",
     author: "MVCaretaking Team",
-    publishedAt: "2025-09-20",
+    publishedAt: "2025-08-20",
     readingTime: 9,
     imageUrl: null,
+    tags: ["seasonal", "checklist", "maintenance"],
   },
   {
     slug: "mv-second-home-management-guide",
@@ -319,9 +325,10 @@ export const BLOG_POSTS = [
     excerpt:
       "From the $100 trillion generational wealth transfer to the 4,000+ registered STRs, here's everything you need to know about owning and managing a Vineyard property from afar.",
     author: "MVCaretaking Team",
-    publishedAt: "2025-08-10",
+    publishedAt: "2025-07-10",
     readingTime: 10,
     imageUrl: null,
+    tags: ["management", "caretaking", "rental"],
   },
   {
     slug: "mv-str-regulations-2025",
@@ -329,8 +336,9 @@ export const BLOG_POSTS = [
     excerpt:
       "Every MV town is now regulating STRs differently. West Tisbury's 30-day occupancy rule, Tisbury's 75-night cap, Chilmark's proposed 95-day limit — here's what owners need to know.",
     author: "MVCaretaking Team",
-    publishedAt: "2025-07-15",
+    publishedAt: "2025-06-15",
     readingTime: 8,
     imageUrl: null,
+    tags: ["regulations", "rental", "towns"],
   },
 ];

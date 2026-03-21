@@ -108,11 +108,11 @@ function QuoteForm() {
         <div className="container-narrow">
           <div className="max-w-2xl mx-auto">
             <form onSubmit={handleSubmit} className="space-y-8">
-              <fieldset disabled={submitting} className="space-y-8">
+              <fieldset disabled={submitting} aria-busy={submitting} className="space-y-8">
               {/* Contact Information */}
               <fieldset>
                 <legend className="text-xl font-serif font-bold text-navy-900 mb-4">
-                  Your Information
+                  Your Information <span className="sr-only">(fields marked with * are required)</span>
                 </legend>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
