@@ -3,6 +3,7 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { BookOpen } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/data";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 export const metadata: Metadata = {
   title: "Blog — Martha's Vineyard Caretaking Tips & Guides",
@@ -120,6 +121,9 @@ export default function BlogIndexPage() {
           <Link href="/get-a-quote" className="btn-primary mt-6">
             Get a Free Quote →
           </Link>
+          <div className="mt-10 max-w-lg mx-auto">
+            <NewsletterSignup variant="blog" />
+          </div>
         </div>
       </section>
     </>

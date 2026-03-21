@@ -4,6 +4,10 @@ import type { Metadata } from "next";
 import { BLOG_POSTS } from "@/lib/data";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { blogContent } from "@/lib/blog-content";
+import ReadingProgress from "@/components/ReadingProgress";
+import TableOfContents from "@/components/TableOfContents";
+import ShareButtons from "@/components/ShareButtons";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 type Props = {
   params: { slug: string };
@@ -175,6 +179,7 @@ export default function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -210,13 +215,22 @@ export default function BlogPostPage({ params }: Props) {
       {/* Content */}
       <article className="section-padding" aria-label={post.title}>
         <div className="container-narrow max-w-3xl mx-auto">
+          <TableOfContents contentId="article-body" />
+
           {content ? (
-            <div className="prose-like">{renderContent(content)}</div>
+            <div id="article-body" className="prose-like">{renderContent(content)}</div>
           ) : (
             <p className="text-navy-500 italic">
               Full article content coming soon.
             </p>
           )}
+
+          <ShareButtons title={post.title} slug={params.slug} />
+
+          {/* Newsletter */}
+          <div className="mt-10">
+            <NewsletterSignup variant="blog" />
+          </div>
 
           {/* CTA */}
           <div className="mt-16 bg-gold-50/50 rounded-2xl p-8 border border-gold-200/50 text-center">
